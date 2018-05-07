@@ -204,9 +204,6 @@
 	                                        <span><a href="info_Edit.action?worktype=change&id=">修改</a></span>
 	                                        <span><a href="info_Edit.action?worktype=delete&id=">删除</a></span>
 	                                	</c:if>
-	                                		<span><a href="info_Edit.action?worktype=refresh&id=${teh.id}">擦亮</a></span>
-	                                        <span><a href="info_Edit.action?worktype=change&id=${teh.id}">修改</a></span>
-	                                        <span><a href="info_Edit.action?worktype=delete&id=${teh.id}">删除</a></span>
 	                                 </div>
                                 </div>
                                 

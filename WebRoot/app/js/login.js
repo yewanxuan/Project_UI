@@ -1,8 +1,10 @@
-layui.use('form', function(){
-    var form = layui.form;
-    form.render();
-
-    form.on('submit(formLogin)', function(data){
-      //  layer.msg(JSON.stringify(data.field));
-    });
-});
+$(function () {
+    $(".userLogin").click(function () {
+        $(".loginArea").show();
+        $(".registerArea").hide();
+    })
+    $(".userRegister").click(function () {
+        $(".loginArea").hide();
+        $(".registerArea").show();
+    })
+})
