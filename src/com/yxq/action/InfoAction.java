@@ -11,6 +11,7 @@ import com.yxq.bean.CreatePage;
 import com.yxq.bean.InfoSingle;
 import com.yxq.bean.UserSingle;
 import com.yxq.tools.DoString;
+import com.yxq.tools.win;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class InfoAction extends InfoSuperAction {
@@ -95,16 +96,29 @@ public class InfoAction extends InfoSuperAction {
 		int top1=createPage.getPerR();
 		int currentP=createPage.getCurrentP();		
 		if(currentP==1){     		//设置显示第1页信息的SQL语句
-			sqlFreeSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+column+" = ?) AND" +
-					" (info_state = '1') " + info_attention + " ORDER BY info_date DESC";
+			if (win.isAndy) {
+				sqlFreeSub="SELECT * FROM tb_info WHERE ("+column+" = ?) AND" +
+						" (info_state = '1') " + info_attention + " ORDER BY info_date DESC LIMIT " + top1;
+			} else {
+				sqlFreeSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+column+" = ?) AND" +
+						" (info_state = '1') " + info_attention + " ORDER BY info_date DESC";
+			}
 		}
 		else{						//设置显示除第1页外，其他指定页码信息的SQl语句
 			int top2=(currentP-1)*top1;
-			sqlFreeSub=	"SELECT TOP "+top1+" * FROM tb_info i WHERE ("+column+" = ?) " +
-					"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
-					"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
-					"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
-							"ORDER BY info_date DESC";
+			if (win.isAndy) {
+				sqlFreeSub=	"SELECT * FROM tb_info i WHERE ("+column+" = ?) " +
+						"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
+						"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
+						"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
+						"ORDER BY info_date DESC LIMIT " + top1;
+			} else {
+				sqlFreeSub=	"SELECT TOP "+top1+" * FROM tb_info i WHERE ("+column+" = ?) " +
+						"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
+						"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
+						"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
+						"ORDER BY info_date DESC";
+			}
 			
 		}
 		

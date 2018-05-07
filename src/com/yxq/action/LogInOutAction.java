@@ -9,6 +9,7 @@ import com.yxq.actionSuper.MySuperAction;
 import com.yxq.dao.DB;
 import com.yxq.dao.OpDB;
 import com.yxq.bean.UserSingle;
+import com.yxq.tools.win;
 
 public class LogInOutAction extends MySuperAction {	
 	protected UserSingle user;
@@ -33,14 +34,24 @@ public class LogInOutAction extends MySuperAction {
 	}
 
 	public String UserLogin() {
-
-		String sql = "select * from tb_user where id = '" + user.getId() +
-				"'and password='"+ user.getPassword() +"';";
+		String sql = "";
+		String sqls = "";
+		if (win.isAndy){
+			sql = "select * from tb_user where name = '" + request.getParameter("user.id") +
+					"'and password='"+ request.getParameter("user.password") +"';";
+		} else {
+			sql = "select * from tb_user where id = '" + user.getId() +
+					"'and password='"+ user.getPassword() +"';";
+		}
 		OpDB myOp= new OpDB();
 		Object []params = {};
 
 		if(myOp.LogOn(sql, params)){
-			String sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
+			if (win.isAndy) {
+				sqls = "select * from tb_user where name = '" + request.getParameter("user.id")+"';" ;
+			} else {
+				sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
+			}
 			user = myOp.OpUser(sqls, params);
 			session.put("loginUser",user);
 			return SUCCESS;
