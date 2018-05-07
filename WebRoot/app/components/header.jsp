@@ -68,10 +68,22 @@
                     <s2:else>
                                  <li class="layui-nav-item"><a href = "index">首页</a></li>
                                 <s2:iterator status="typesStatus" value="types">
-                                	 <s2:if test="#typesStatus.index<11">
-	                                  <li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/></a></li>
-    	                                <s2:if test="#typesStatus.index==4"><br></s2:if>
+                                	 <s2:if test="#typesStatus.index<5">
+	                                  <li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/><s2:property value="#typesStatus.index"/></a></li>
 									 </s2:if>
+                                    <s2:if test="#typesStatus.index=5">
+                                        <%--<li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/><s2:property value="#typesStatus.index"/></a></li>--%>
+                                        <li class="layui-nav-item">
+                                            <a href="javascript:;">
+                                                <i class="layui-icon wd-user-avatar"> >>>>>> </i>
+                                            </a>
+                                            <dl class="layui-nav-child">
+                                                <dd>
+                                                    <a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/></a>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </s2:if>
                                 </s2:iterator>
                             </tr>                      
                         </table>
