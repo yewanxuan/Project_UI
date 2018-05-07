@@ -36,11 +36,11 @@ public class DB {
 	
 	private Connection getcon(){
 		try{
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con=DriverManager.getConnection(getconurl(),userName,password);
+//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//			con=DriverManager.getConnection(getconurl(),userName,password);
 
-		//	Class.forName("com.mysql.jdbc.Driver");
-		//	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/infodb?useUnicode=true&characterEncoding=utf8", "root", "wenqi");
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/infodb?useUnicode=true&characterEncoding=utf8", "root", "wenqi");
 		}
 		catch(Exception e){
 			e.printStackTrace();
