@@ -1,0 +1,26 @@
+/* 文字分割线 */
+.site-title{
+    width: 95%;
+    text-align: left;
+    margin: 30px auto 0px;
+}
+.site-title fieldset{
+    border: none;
+    padding: 0;
+    border-top: 1px solid #eeeeee;
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35rem;
+    -webkit-padding-start: 0.75rem;
+    -webkit-padding-end: 0.75rem;
+    -webkit-padding-after: 0.625rem;
+    min-width: -webkit-min-content;
+
+}
+.site-title fieldset legend{
+    margin-left: 20px;
+    padding: 0 10px;
+    font-weight: 300;
+    font-size: 22px;
+}
