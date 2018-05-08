@@ -8,11 +8,12 @@ import com.sun.deploy.net.HttpResponse;
 import com.yxq.actionSuper.MySuperAction;
 import com.yxq.dao.DB;
 import com.yxq.dao.OpDB;
+import com.yxq.bean.AdminSingle;
 import com.yxq.bean.UserSingle;
 
 public class LogInOutAction extends MySuperAction {	
 	protected UserSingle user;
-	
+	protected AdminSingle admin;
 	public UserSingle getUser() {
 		return user;
 	}
@@ -20,6 +21,12 @@ public class LogInOutAction extends MySuperAction {
 		this.user = user;
 	}
 	
+	public AdminSingle getAdmin() {
+		return admin;
+	}
+	public void setAdmin(AdminSingle admin) {
+		this.admin = admin;
+	}
 	public String isLogin(){
 		Object user = session.get("loginUser");
 		if(user == null||!(user instanceof UserSingle)){
@@ -32,6 +39,18 @@ public class LogInOutAction extends MySuperAction {
 		}
 	}
 
+	public String isAdminLogin(){
+		Object admin = session.get("loginAdmin");
+		if(admin == null||!(admin instanceof AdminSingle)){
+			System.out.println("loginadmin is null");
+			return "admininput";
+		}
+		else{
+			System.out.println("loginadmin is not null");
+			return "adminlogin";
+		}
+	}
+	
 	public String UserLogin() {
 
 		String sql = "select * from tb_user where id = '" + user.getId() +
@@ -52,22 +71,37 @@ public class LogInOutAction extends MySuperAction {
 	/*
 	* 此方法有毒，一运行就出错，我重写了一个userLogin()方法，在上边  待定
 	* */
-	public String Login(){
+	public String AdminLogin(){
 		System.out.println("login action");
-		String sql = "select * from tb_user where user_name = '"+user.getId()+
-				"'and user_password='"+user.getPassword()+"';";
+		String sql = "select * from tb_admin where admin_name = '"+admin.getUserName()+
+				"'and admin_password='"+admin.getUserPassword()+"';";
+		System.out.println(sql);
+		
 		OpDB myOp= new OpDB();
 		Object []params = {};
 
 		if(myOp.LogOn(sql, params)){
-			session.put("loginUser",user);//记得保存
-			return LOGIN;
+			System.out.println("true");
+			session.put("loginAdmin",admin);//记得保存
+			return "adminlogin";
 		}
 		else{
 			addFieldError("loginE",getText("Project.login.wrong.input"));
-			return INPUT;
+			return "admininput";
 		}
 		 
+	}
+	
+	public String UserAdd(){
+		String sql = "insert into  tb_user (id,password,email,phone,name) values (?,?,?,?,?);" ;
+		OpDB myOp= new OpDB();
+		Object []params = {user.getId(),user.getPassword(),user.getEmail(),user.getPhone(),user.getName()};
+		int i=myOp.OpUpdate(sql,params);
+		if(i<=0){
+			return INPUT;
+		}else{
+			return "login";
+		}
 	}
 	
 	public String Logout(){
