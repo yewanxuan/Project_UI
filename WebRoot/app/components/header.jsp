@@ -61,34 +61,19 @@
                     </dl>
                 </c:if>
             </li>
-            
-            <span class="wd-nav-choise">
-            	<s2:set name="types" value="#session.typeMap"/>
-            	 <s2:if test="#types==null||#types.size()==0">没有信息类别可显示！</s2:if>
-                    <s2:else>
-                                 <li class="layui-nav-item"><a href = "index">首页</a></li>
-                                <s2:iterator status="typesStatus" value="types">
-                                	 <s2:if test="#typesStatus.index<5">
-	                                  <li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/><s2:property value="#typesStatus.index"/></a></li>
-									 </s2:if>
-                                    <s2:if test="#typesStatus.index=5">
-                                        <%--<li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/><s2:property value="#typesStatus.index"/></a></li>--%>
-                                        <li class="layui-nav-item">
-                                            <a href="javascript:;">
-                                                <i class="layui-icon wd-user-avatar"> >>>>>> </i>
-                                            </a>
-                                            <dl class="layui-nav-child">
-                                                <dd>
-                                                    <a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/></a>
-                                                </dd>
-                                            </dl>
-                                        </li>
-                                    </s2:if>
-                                </s2:iterator>
-                            </tr>                      
-                        </table>
-                    </s2:else>
 
+            <span class="wd-nav-choise">
+                <c:forEach var="item" items="${sessionScope.typeMap}" end="4">
+                    <li class="layui-nav-item"><a href="info_ListShow.action?infoType=${item.key}">${item.value}</a></li>
+                </c:forEach>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"> >>> </a>
+                    <dl class="layui-nav-child">
+                        <c:forEach var="it" items="${sessionScope.typeMap}" begin="5" end="10">
+                            <dd><a href="info_ListShow.action?infoType=${it.key}">${it.value}</a></dd>
+                        </c:forEach>
+                    </dl>
+                </li>
             </span>
         </ul>
     </div>
