@@ -13,17 +13,12 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/assets/layui/css/layui.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/login.css"> 
-    
-    
-    <link rel="stylesheet" href="/app/assets/layui/css/layui.css">
-    <link rel="stylesheet" href="/app/css/public/reset.css">
-    <link rel="stylesheet" href="/app/css/login.css">
+
 </head>
 <body>
     <div class="loginFrame">
         <div class="loginArea">
-            <div class="loginTitle">登录 / 注册</div>
-
+            <div class="loginTitle"><span class="userLogin blueFont">登录</span> / <span class="userRegister">注册</span></div>
 			<s2:form action="log_UserLogin.action" theme="simple" >
                 <div class="layui-form-item">
                     <div class="layui-input-block wd-input-block">
@@ -48,12 +43,62 @@
                 </div>
             </s2:form>
         </div>
+        <div class="registerArea">
+            <div class="registerTitle"><span class="userLogin">登录</span> / <span class="userRegister blueFont">注册</span></div>
+            <s2:form action="log_UserAdd.action" theme="simple" >
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="text" name="user.id" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="password" name="user.password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="password" name="repeatpassword" required  lay-verify="required" placeholder="请再次确认密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <button lay-submit class="layui-btn layui-btn-radius layui-btn-normal layui-btn-fluid" lay-filter="formLogin">注 册</button>
+                        <button class="layui-btn layui-btn-radius layui-btn-fluid layui-btn-primary" onclick="showLoginArea">返回登录</button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="text" name="user.name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="text" name="user.phone" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <input type="text" name="user.email" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                
+            </s2:form>
+        </div>
     </div>
-    <script src="/app/assets/layui/layui.js"></script>
-    <script src="/app/js/login.js"></script>
-    
+
+    <script src=" <%= request.getContextPath()%>/app/js/public/jquery-3.2.1.min.js"></script>
     <script src=" <%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
     <script src=" <%= request.getContextPath()%>/app/js/login.js"></script>
-
+    <script>
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+            form.on('submit(formLogin)', function(data){
+                //  layer.msg(JSON.stringify(data.field));
+            });
+        });
+    </script>
 </body>
 </html>
