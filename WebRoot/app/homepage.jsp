@@ -106,10 +106,10 @@
         
         <div class="contentRight">
 
-
+            <%--筛选区域--%>
 		    <div class="subListArea">
   				<form class="layui-form" action="info_ListShow.action">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item wd-search-form-item">
                         <label class="layui-form-label wd-form-label">团队</label>
                         <div class="layui-input-block wd-input-block">
                             <select name="attent" lay-filter="aihao">
@@ -125,7 +125,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item wd-search-form-item">
                         <label class="layui-form-label wd-form-label">方向</label>
                         <div class="layui-input-block wd-input-block">
                             <select name="infoType" lay-filter="aihao">
@@ -142,9 +142,9 @@
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
+                    <div class="layui-form-item wd-fileter-form-item">
                         <div class="layui-input-block wd-btn-block">
-                            <button class="layui-btn layui-btn-fluid" lay-submit ><!-- lay-filter="formDemo" --> 搜&nbsp;&nbsp;&nbsp;索</button>
+                            <button class="layui-btn layui-btn-fluid" lay-submit ><!-- lay-filter="formDemo" --> 筛&nbsp;&nbsp;&nbsp;选</button>
                         </div>
                     </div>
                 </form>    
