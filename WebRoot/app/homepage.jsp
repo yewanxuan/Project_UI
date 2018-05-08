@@ -36,11 +36,7 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/public.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/index.css"> 
-    
-    <link rel="stylesheet" href="/app/assets/layui/css/layui.css">
-    <link rel="stylesheet" href="/app/css/public/reset.css">
-    <link rel="stylesheet" href="/app/css/public/public.css">
-    <link rel="stylesheet" href="/app/css/index.css">
+
 </head>
 <body>
     <jsp:include page="components/header.jsp"></jsp:include>
@@ -53,11 +49,6 @@
                 <img src="<%= request.getContextPath()%>/app/assets/images/slide/slide-3.png" alt="">
                 <img src="<%= request.getContextPath()%>/app/assets/images/slide/slide-4.png" alt="">
                 <img src="<%= request.getContextPath()%>/app/assets/images/slide/slide-5.png" alt="">
-                <img src="/app/assets/images/slide/slide-1.png" alt="">
-                <img src="/app/assets/images/slide/slide-2.png" alt="">
-                <img src="/app/assets/images/slide/slide-3.png" alt="">
-                <img src="/app/assets/images/slide/slide-4.png" alt="">
-                <img src="/app/assets/images/slide/slide-5.png" alt="">
             </div>
         </div>
 
@@ -289,11 +280,6 @@
     </div>
     <jsp:include page="components/footer.jsp"></jsp:include>
 
-    <script src="/app/js/public/jquery-3.2.1.min.js"></script>
-    <script src="/app/assets/layui/layui.js"></script>
-    <script src="/app/js/index.js"></script>
-    <script src="/app/js/homepage.js"></script>
-    
     <script src="<%= request.getContextPath()%>/app/js/public/jquery-3.2.1.min.js"></script>
     <script src="<%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
     <script src="<%= request.getContextPath()%>/app/js/index.js"></script>

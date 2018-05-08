@@ -30,5 +30,4 @@ public class TypeSingle {
 		this.type_pid = type_pid;
 	}
 
-	
 }

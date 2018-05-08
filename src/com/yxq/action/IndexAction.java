@@ -5,14 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
+import com.sun.xml.internal.txw2.annotation.XmlNamespace;
 import com.yxq.actionSuper.MySuperAction;
 import com.yxq.dao.OpDB;
 import com.yxq.bean.InfoSingle;
+
+import javax.xml.ws.Action;
 
 public class IndexAction extends MySuperAction {	
 	public static TreeMap typeMap;					
 	public static TreeMap searchMap;
 	public static TreeMap sublevelMap;
+
 	/*
 	* 这里的typeMap应该是为了拿到顶栏的项目分类吧
 	* */
@@ -57,4 +61,5 @@ public class IndexAction extends MySuperAction {
 		session.put("sublevelmap", sublevelMap);
 		return SUCCESS;
 	}
+
 }

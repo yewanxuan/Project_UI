@@ -13,11 +13,7 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/assets/layui/css/layui.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/login.css"> 
-    
-    
-    <link rel="stylesheet" href="/app/assets/layui/css/layui.css">
-    <link rel="stylesheet" href="/app/css/public/reset.css">
-    <link rel="stylesheet" href="/app/css/login.css">
+
 </head>
 <body>
     <div class="loginFrame">
@@ -75,10 +71,7 @@
         </div>
     </div>
 
-    <script src="/app/js/public/jquery-3.2.1.min.js"></script>
-    <script src="/app/assets/layui/layui.js"></script>
-    <script src="/app/js/login.js"></script>
-    
+    <script src=" <%= request.getContextPath()%>/app/js/public/jquery-3.2.1.min.js"></script>
     <script src=" <%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
     <script src=" <%= request.getContextPath()%>/app/js/login.js"></script>
     <script>
