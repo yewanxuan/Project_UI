@@ -53,7 +53,9 @@ public class LogInOutAction extends MySuperAction {
 				sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
 			}
 			user = myOp.OpUser(sqls, params);
+			System.out.println(user.getId());
 			session.put("loginUser",user);
+			session.put("loginUserId", user.getId());
 			return SUCCESS;
 		} else {
 			return INPUT;

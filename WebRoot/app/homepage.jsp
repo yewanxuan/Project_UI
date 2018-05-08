@@ -190,11 +190,13 @@
                                         <span>${teh.infoEmail}</span>
                                     </div>
                                     <div class="wd-bottom-area wd-person-area">
-                                    	<c:if test="${sessionScope.loginUser.id==teh.infoUserid}">
-	                                        <span><a href="info_Edit.action?worktype=refresh&id=">擦亮</a></span>
-	                                        <span><a href="info_Edit.action?worktype=change&id=">修改</a></span>
-	                                        <span><a href="info_Edit.action?worktype=delete&id=">删除</a></span>
-	                                	</c:if>
+                                        <c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">
+                                            <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
+                                                <span><a href="info_Edit.action?worktype=refresh&id=">擦亮</a></span>
+                                                <span><a href="info_Edit.action?worktyee=change&id=">修改</a></span>
+                                                <span><a href="info_Edit.action?worktype=delete&id=">删除</a></span>
+                                            </c:if>
+                                        </c:if>
 	                                 </div>
                                 </div>
                                 
