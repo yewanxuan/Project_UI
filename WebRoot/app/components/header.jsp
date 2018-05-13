@@ -46,6 +46,21 @@
             <li class="layui-nav-item wd-nav-logo">
                 <a href="index.action">项目信息网</a>
             </li>
+            <li class="layui-nav-item wd-nav-logo">
+	             <c:if test="${sessionScope.loginAdmin == null}">
+	                    <a href="log_isAdminLogin.action">管理员登录</a>
+	                </c:if>
+	                <c:if test="${sessionScope.loginAdmin != null}">
+	                    <a href="javascript:;">
+	                        <i class="layui-icon wd-user-avatar">&#xe612;</i>
+	                    </a>
+	                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+	                        <dd><a href="">查封账户</a></dd>
+	                        <dd><a href="type_TypeShow.action">类别管理</a></dd>
+	                        <dd><a href="log_AdminLogout.action">退出登录</a></dd>
+	                    </dl>
+	                </c:if>
+            </li>
             <li class="layui-nav-item wd-nav-login">
                 <c:if test="${sessionScope.loginUser == null}">
                     <a href="log_isLogin.action">登录</a>
@@ -56,27 +71,24 @@
                     </a>
                     <dl class="layui-nav-child"> <!-- 二级菜单 -->
                         <dd><a href="info_ShowAdd.action?addType=linkTo">发布信息</a></dd>
-                        <dd><a href="info_SearchShow.action?subsql=info_userid&type=all">我的管理</a></dd>
+                        <dd><a href="info_SearchShow.action?subsql=info_userid&sqlvalue=${sessionScope.loginUser.id}&type=all">我的管理</a></dd>
                         <dd><a href="log_Logout.action">退出登录</a></dd>
                     </dl>
                 </c:if>
             </li>
-            
-            <span class="wd-nav-choise">
-            	<s2:set name="types" value="#session.typeMap"/>
-            	 <s2:if test="#types==null||#types.size()==0">没有信息类别可显示！</s2:if>
-                    <s2:else>
-                                 <li class="layui-nav-item"><a href = "index">首页</a></li>
-                                <s2:iterator status="typesStatus" value="types">
-                                	 <s2:if test="#typesStatus.index<11">
-	                                  <li class="layui-nav-item"><a href="info_ListShow.action?infoType=<s2:property value='key'/>" ><s2:property value="value"/></a></li>
-    	                                <s2:if test="#typesStatus.index==4"><br></s2:if>
-									 </s2:if>
-                                </s2:iterator>
-                            </tr>                      
-                        </table>
-                    </s2:else>
 
+            <span class="wd-nav-choise">
+                <c:forEach var="item" items="${sessionScope.typeMap}" end="4">
+                    <li class="layui-nav-item"><a href="info_ListShow.action?infoType=${item.key}">${item.value}</a></li>
+                </c:forEach>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"> >> </a>
+                    <dl class="layui-nav-child">
+                        <c:forEach var="it" items="${sessionScope.typeMap}" begin="5" end="10">
+                            <dd><a href="info_ListShow.action?infoType=${it.key}">${it.value}</a></dd>
+                        </c:forEach>
+                    </dl>
+                </li>
             </span>
         </ul>
     </div>
