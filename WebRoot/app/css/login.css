@@ -26,6 +26,25 @@ body {
     font-size: 22px;
     color: #8b8b8b;
 }
+.registerArea{
+    display: none;
+    width: 70%;
+    margin: 0px auto;
+}
+.registerTitle{
+    margin: 60px auto 40px;
+    font-size: 22px;
+    color: #8b8b8b;
+}
+.blueFont{
+    color: #439ff8;
+}
+.userLogin{
+    cursor: pointer;
+}
+.userRegister{
+    cursor: pointer;
+}
 .wd-input-block{
     font-size: 14px;
     margin-left: 0px;

@@ -31,6 +31,21 @@ body {
     display: inline-block;
     clear: both;
 }
+.subListArea{
+    margin: 30px auto;
+    width: 100%;
+}
+.wd-search-form-item{
+    width: 40%;
+    display: inline-block;
+}
+.wd-fileter-form-item{
+    position: relative;
+    top: -2px;
+    width: 15%;
+    margin-left: 5px;
+    display: inline-block;
+}
 .typeLabel{
     font-size: 12px;
     margin: 0 10px 0 0;

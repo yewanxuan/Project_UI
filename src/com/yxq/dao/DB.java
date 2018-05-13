@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.yxq.tools.OS;
+
 
 public class DB {
 	private Connection con;
@@ -36,11 +38,13 @@ public class DB {
 	
 	private Connection getcon(){
 		try{
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con=DriverManager.getConnection(getconurl(),userName,password);
-
-		//	Class.forName("com.mysql.jdbc.Driver");
-		//	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/infodb?useUnicode=true&characterEncoding=utf8", "root", "wenqi");
+			if (OS.getMacStatus()) {
+				Class.forName("com.mysql.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/infodb?useUnicode=true&characterEncoding=utf8", "root", "wenqi");
+			} else {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con=DriverManager.getConnection(getconurl(),userName,password);
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();

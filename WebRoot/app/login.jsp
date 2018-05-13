@@ -64,12 +64,6 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block wd-input-block">
-                        <button lay-submit class="layui-btn layui-btn-radius layui-btn-normal layui-btn-fluid" lay-filter="formLogin">注 册</button>
-                        <button class="layui-btn layui-btn-radius layui-btn-fluid layui-btn-primary" onclick="showLoginArea">返回登录</button>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block wd-input-block">
                         <input type="text" name="user.name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -81,6 +75,12 @@
                 <div class="layui-form-item">
                     <div class="layui-input-block wd-input-block">
                         <input type="text" name="user.email" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block wd-input-block">
+                        <button lay-submit class="layui-btn layui-btn-radius layui-btn-normal layui-btn-fluid" lay-filter="formLogin">注 册</button>
+                        <button class="layui-btn layui-btn-radius layui-btn-fluid layui-btn-primary" onclick="showLoginArea">返回登录</button>
                     </div>
                 </div>
                 
