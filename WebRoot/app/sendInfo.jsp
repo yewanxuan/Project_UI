@@ -42,33 +42,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		rs.close();
 		
 		System.out.println(alltype.size());
-      	String[][] nameString=new String[12][12];//定义一个二维数组  
+      	String[][] nameString=new String[12][12];//定义一个二维数组
+        String jsonStr = "[";
     	int[][] nameid=new int[12][12];  
     	for(int i = 1; i <= 11; i++){
     		int count = 0;
+    		jsonStr += "{'pid': " + i + ", 'second_data': [";
     		for(int j=0;j<alltype.size();j++){
-    			
     			if(alltype.get(j).getType_pid()==i){
-    				  nameString[i][count]=alltype.get(j).getType_name();  
-    				  nameid[i][count]=alltype.get(j).getId();
-    				  System.out.println("now pid ="+i+nameString[i][count]+nameid[i][count]);
-    				  count++;
+                    jsonStr += "{";
+    			    nameString[i][count]=alltype.get(j).getType_name();
+    			    nameid[i][count]=alltype.get(j).getId();
+    			    jsonStr += "'typeName': '" + nameString[i][count] + "', 'id': " + nameid[i][count];
+    			    System.out.println("now pid ="+i+nameString[i][count]+nameid[i][count]);
+    			    count++;
+    			    jsonStr += "},";
     			}
     		}
-    	}  
-
-		
+    		String tpch = jsonStr.substring(jsonStr.length()-1, jsonStr.length());
+    		if (tpch.equals(",")){
+    		    jsonStr = jsonStr.substring(0, jsonStr.length()-1);
+            }
+    		jsonStr += "]},";
+    	}
+        String tpc = jsonStr.substring(jsonStr.length()-1, jsonStr.length());
+        if (tpc.equals(",")){
+            jsonStr = jsonStr.substring(0, jsonStr.length()-1);
+        }
+    	jsonStr += "]";
+    	System.out.println("jsonStr:" + jsonStr);
 	%>
 
-
-
-
+    <input type="hidden" id="jsonObj" value="<%=jsonStr%>">
 
     <div class="content">
         <hr class="clearBoth">
         <div class="headTitle"><i class="layui-icon">&#xe609;</i>发布信息</div>
         <form class="layui-form wd-form" action="info_addInfo.action" name="frm">
-
              <div class="layui-form-item">
                 <label class="layui-form-label">信息类别</label>
                 <div class="layui-input-block wd-select-block">
