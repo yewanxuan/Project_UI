@@ -16,6 +16,7 @@
             <result name="success">/app/homepage.jsp</result>
             <result name="input">/app/sendInfo.jsp</result>
             <result name="insert success" type="redirectAction">index</result>
+            <result name="refresh">/app/homepage.jsp</result>
         </action>
         
         <action name="log_*" class="com.yxq.action.LogInOutAction" method="{1}">
@@ -23,30 +24,16 @@
 			<result name="login">/app/login.jsp</result>
             <result name="success" type="chain">index</result>
 			<result name="logout" type="redirectAction">index</result>
+			<result name="admininput">/app/AdminLogin.jsp</result>
+			<result name="adminlogin" type="chain">index</result> 
        	</action>
 
-        <action name="admin_*" class="com.yxq.action.AdminAction" method="{1}">
-            <result name="input">
-            	/app/admin/view/AdminTemp.jsp
-            </result>
-            <result>
-            	/app/admin/view/AdminTemp.jsp
-            </result>
-            <result name="checkSuccess" type="redirectAction">
-                admin_ListShow.action
-            </result>
-            <result name="deleteSuccess" type="redirectAction">
-                admin_ListShow.action
-            </result>
-            <result name="setAttentSuccess">
-            	/app/admin/view/AdminTemp.jsp
-            </result>
-            <result name="UnSuccess">
-            	/app/admin/view/AdminTemp.jsp
-            </result>
-        </action>
+        <action name="type_*" class="com.yxq.action.TypeAction" method="{1}">
+			<result name="success">/app/typepage.jsp</result>
+       	</action>
+
+
        	
     </package>
   </struts>
     
-     
