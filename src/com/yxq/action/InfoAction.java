@@ -23,6 +23,24 @@ public class InfoAction extends InfoSuperAction {
 		OpDB myOp=new OpDB();
 		String worktype = request.getParameter("worktype");
 		String id = request.getParameter("id");
+		String infoType = request.getParameter("infotType");
+		String subsql="info_userid";
+		UserSingle user = null;
+		String sqlvalue = null;
+		String opname=" = ";
+
+		String type = "all";	
+		if(session.get("loginUser")!=null){
+			user = (UserSingle) session.get("loginUser");
+			sqlvalue = user.getId();
+		}
+		else{
+			sqlvalue = myOp.OpSingleShow("select *from tb_info where id = "+id+";", null).getInfoUserid();
+		}
+		System.out.println(sqlvalue);
+		String param=sqlvalue;	
+
+		
 		if(worktype.equals("refresh")){
 			System.out.println(id);
 			String sql = "update tb_info set info_date = ? where id = ?";
@@ -42,28 +60,36 @@ public class InfoAction extends InfoSuperAction {
 			request.setAttribute("infoSingle", infoSingle);
 			return "input";
 		}
-		
-		String subsql="info_userid";
-		UserSingle user = (UserSingle) session.get("loginUser");
-		String sqlvalue = user.getId();
-		String opname=" = ";
-		String param=sqlvalue;	
-		String type = "all";	
-		List_for_show(subsql,opname,sqlvalue,type,param);
+		if(session.get("loginUser")!=null){
+			List_for_show(subsql,opname,sqlvalue,type,param);
+			return "success";
+		}
+		else{
 
-		return "success";
+			return "refresh";
+		}
+
 	}
 	
 	
 	public String ListShow(){
-		request.setAttribute("mainPage","/pages/show/listshow.jsp");	
+
 		OpDB myOp = new OpDB();
 		String infoType = request.getParameter("infoType");
+		String tiptop = request.getParameter("tiptop");
 		Object []params = {infoType};
 		String column = "info_type";
 		String type_pid = null;
+		
+		if(tiptop!=null){
+			Object [] tiptopparams = {tiptop};
+			String sql="SELECT * from tb_info WHERE id = ?";
+			InfoSingle tipSingle = myOp.OpSingleShow(sql, tiptopparams);
+			request.setAttribute("tipSingle", tipSingle);
+		}
+		
 		//只有直接选择一级目录的时候，才会出现infoType有值的情况
-		if(Integer.valueOf(infoType) <= 11){
+		if(Integer.valueOf(infoType)<= 11){
 			type_pid = infoType;
 			column = "info_typepid";
 			System.out.println("now type_pid is "+infoType);
@@ -80,11 +106,12 @@ public class InfoAction extends InfoSuperAction {
 		if(attent != null && attent != ""){
 			info_attention = "AND (info_attention = '"+attent+"')"; 
 		}
+		
 		/* 获取当前页要显示的免费信息 */
 		String sqlFreeAll="SELECT * FROM tb_info WHERE ("+column+" = ?) AND (info_state='1') " 
 				 + info_attention + "ORDER BY info_attention ASC,info_date DESC";		
 		String sqlFreeSub="";
-		int perR=4;
+		int perR=10;
 		String CurrentP = request.getParameter("showpage");
 		String gowhich = null;
 		gowhich = "info_ListShow.action?infoType="+infoType;
@@ -152,7 +179,7 @@ public class InfoAction extends InfoSuperAction {
 		System.out.println("addtype is "+addtype);
 		//Integer type = Integer.parseInt(request.getParameter("infoType"));
 		Integer typepid = Integer.parseInt(request.getParameter("infoTypepid"));
-		Integer type = Integer.parseInt(request.getParameter("infoTypepid"));
+		Integer type = Integer.parseInt(request.getParameter("infoType"));
 		String title = request.getParameter("infoTitle");
 		String linkman = request.getParameter("infoPeople");
 		String phone = request.getParameter("infoPhone");
@@ -182,10 +209,12 @@ public class InfoAction extends InfoSuperAction {
 
 		String subsql=request.getParameter("subsql");
 		String sqlvalue=null;
-
+		UserSingle user = null;
 		if(subsql.equals("info_userid")){
-			UserSingle user = (UserSingle) session.get("loginUser");
-			sqlvalue = user.getId();
+			if(session.get("loginUser")!=null){
+				user = (UserSingle) session.get("loginUser");
+				sqlvalue = user.getId();
+			}
 		}
 		else{
 			sqlvalue=request.getParameter("sqlvalue");	
@@ -219,6 +248,8 @@ public class InfoAction extends InfoSuperAction {
 		return "success";
 	}
 	
+	
+
 	private void List_for_show(String subsql,String opname,String sqlvalue,String type,String param){
 		String sqlSearchAll="SELECT * FROM tb_info WHERE ("+subsql+opname+"?) ORDER BY info_date DESC";
 		String sqlSearchSub="";		
@@ -242,14 +273,17 @@ public class InfoAction extends InfoSuperAction {
 			sqlSearchSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+subsql+opname+"?) AND (info_date < (SELECT MIN(info_date) FROM (SELECT TOP "+top2+" info_date FROM tb_info WHERE "+subsql+opname+"'"+param+"' ORDER BY info_date DESC) AS mindate)) ORDER BY info_date DESC";
 //			sqlSearchSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+subsql+opname+"?) AND (info_date NOT IN (SELECT TOP "+top2+" info_date FROM tb_info WHERE "+subsql+opname+"'"+param+"' ORDER BY info_date DESC)) ORDER BY info_date DESC";				//��һ��ʵ�ַ�ҳ��ѯ��SQL���
 		}
-		System.out.println(sqlSearchSub);
+
 		List searchlist=myOp.OpListShow(sqlSearchSub, params);
 		request.setAttribute("attentionlist",searchlist);
 		request.setAttribute("createpage", createPage);
 		
 	}
+	
+	
+	
 	public void validateListShow(){
-		request.setAttribute("mainPage","/pages/error.jsp");
+/*		request.setAttribute("mainPage","/pages/error.jsp");
 		String infoType=request.getParameter("infoType");
 		if(infoType==null&&infoType.equals("")){
 			addFieldError("ListShowNoType",getText("Project.info.listshow.no.infoType"));
@@ -262,7 +296,7 @@ public class InfoAction extends InfoSuperAction {
 				addFieldError("ListShowWrongType",getText("Project.info.listshow.format.infoType"));
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}		
 				
 
