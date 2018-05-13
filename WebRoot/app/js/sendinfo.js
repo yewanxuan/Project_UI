@@ -10,7 +10,7 @@ layui.use(['form','element'], function(){
         var str = '<option value="请选择" selected>请选择</option>';
         for (var i=0; i< jsonObj.length;i++){
             if (selectIndex == jsonObj[i].pid) {
-                for (var j=0;j<jsonObj[i].second_data.length;j++){
+                for (var j=1;j<jsonObj[i].second_data.length;j++){
                     str += "<option value='" + jsonObj[i].second_data[j].id + "'>" + jsonObj[i].second_data[j].typeName + "</option>";
                 }
             }
