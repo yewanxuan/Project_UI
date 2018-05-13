@@ -62,6 +62,7 @@ public class LogInOutAction extends MySuperAction {
 			String sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
 			user = myOp.OpUser(sqls, params);
 			session.put("loginUser",user);
+			session.put("loginUserId", user.getId());
 			return SUCCESS;
 		} else {
 			return INPUT;
@@ -102,6 +103,12 @@ public class LogInOutAction extends MySuperAction {
 		}else{
 			return "login";
 		}
+	}
+	
+	public String AdminLogout(){
+		//session.evict(admin);
+		session.clear();
+		return "logout";
 	}
 	
 	public String Logout(){
