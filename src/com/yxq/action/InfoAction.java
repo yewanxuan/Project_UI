@@ -13,8 +13,6 @@ import com.yxq.bean.UserSingle;
 import com.yxq.tools.DoString;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-import com.yxq.tools.OS;
-
 public class InfoAction extends InfoSuperAction {
 	/**
 	 * 
@@ -110,7 +108,7 @@ public class InfoAction extends InfoSuperAction {
 		}
 		
 		/* 获取当前页要显示的免费信息 */
-		String sqlFreeAll="SELECT * FROM tb_info WHERE ("+column+" = " + infoType + ") AND (info_state='1') "
+		String sqlFreeAll="SELECT * FROM tb_info WHERE ("+column+" = ?) AND (info_state='1') " 
 				 + info_attention + "ORDER BY info_attention ASC,info_date DESC";		
 		String sqlFreeSub="";
 		int perR=10;
@@ -123,44 +121,24 @@ public class InfoAction extends InfoSuperAction {
 	
 		int top1=createPage.getPerR();
 		int currentP=createPage.getCurrentP();		
-		if(currentP==1){
-			//设置显示第1页信息的SQL语句
-			if (OS.getMacStatus()) {
-				sqlFreeSub="SELECT * FROM tb_info WHERE ("+column+" = " + infoType + ") AND" +
-						" (info_state = '1') " + info_attention + " ORDER BY info_date DESC LIMIT " + top1;
-			} else {
-				sqlFreeSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+column+" = ?) AND" +
-						" (info_state = '1') " + info_attention + " ORDER BY info_date DESC";
-			}
-			System.out.println(sqlFreeSub);
+		if(currentP==1){     		//设置显示第1页信息的SQL语句
+			sqlFreeSub="SELECT TOP "+top1+" * FROM tb_info WHERE ("+column+" = ?) AND" +
+					" (info_state = '1') " + info_attention + " ORDER BY info_date DESC";
 		}
 		else{						//设置显示除第1页外，其他指定页码信息的SQl语句
 			int top2=(currentP-1)*top1;
-			if (OS.getMacStatus()) {
-				sqlFreeSub=	"SELECT * FROM tb_info i WHERE ("+column+" = " + infoType + ") " +
-						"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
-						"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
-						"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
-						"ORDER BY info_date DESC LIMIT " + top1;
-			} else {
-				sqlFreeSub=	"SELECT TOP "+top1+" * FROM tb_info i WHERE ("+column+" = ?) " +
-						"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
-						"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
-						"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
-						"ORDER BY info_date DESC";
-			}
-			System.out.println(sqlFreeSub);
+			sqlFreeSub=	"SELECT TOP "+top1+" * FROM tb_info i WHERE ("+column+" = ?) " +
+					"AND (info_state = '1') " + info_attention + " AND (info_date < (SELECT MIN(info_date) " +
+					"FROM (SELECT TOP "+top2+" (info_date) FROM tb_info WHERE ("+column+" = i."+column+") AND " +
+					"(info_state = '1') " + info_attention + "ORDER BY info_date DESC) AS mindate)) " +
+							"ORDER BY info_date DESC";
 			
 		}
-		System.out.println(params);
-		List onelist = null;
-		if (OS.getMacStatus()) {
-			onelist = myOp.OpListShow(sqlFreeSub, null);
-		} else {
-			onelist = myOp.OpListShow(sqlFreeSub, params);
-		}
+		
+		List onelist = myOp.OpListShow(sqlFreeSub, params);
 		request.setAttribute("attentionlist",onelist);
 		request.setAttribute("createpage", createPage);//这个是最后一行用的上的东西
+		
 
 		return SUCCESS;
 	}
@@ -197,9 +175,8 @@ public class InfoAction extends InfoSuperAction {
 	* */
 	public String addInfo() {
 		OpDB myOp=new OpDB();
-		String addtype = request.getParameter("addtype");
+		String addtype = request.getParameter("addType");
 		System.out.println("addtype is "+addtype);
-		//Integer type = Integer.parseInt(request.getParameter("infoType"));
 		Integer typepid = Integer.parseInt(request.getParameter("infoTypepid"));
 		Integer type = Integer.parseInt(request.getParameter("infoType"));
 		String title = request.getParameter("infoTitle");
@@ -210,20 +187,33 @@ public class InfoAction extends InfoSuperAction {
 		String date=DoString.dateTimeChange(new java.util.Date());
 		String state="1";
 		String attention=request.getParameter("infoAttention");
-		UserSingle user = (UserSingle) session.get("loginUser");
+		String id = request.getParameter("id");
+
+		UserSingle user = (UserSingle)session.get("loginUser");
 		String userid = user.getId();
-		System.out.println(userid);
-		Object[] params={type,title,content,linkman,phone,email,date,state,attention,typepid,userid};
+		int i;
 		String sql = null;
-		sql="insert into tb_info(info_type, info_title, info_content, info_linkman, info_phone, info_email, info_date, info_state, info_attention, info_typepid,info_userid) values(?,?,?,?,?,?,?,?,?,?,?)";
-		//sql="update tb_info set (info_type, info_title, info_content, info_linkman, info_phone, info_email, info_date, info_state, info_attention, info_typepid,info_userid) values(?,?,?,?,?,?,?,?,?,?,?)";
-		
-		int i=myOp.OpUpdate(sql,params);
-		if(i<=0){
-			return INPUT;
-		}else{
-			return "insert success";
+		if(true){
+			sql="insert into tb_info(info_type, info_title, info_content, info_linkman, info_phone, info_email, info_date, info_state, info_attention, info_typepid,info_userid) values(?,?,?,?,?,?,?,?,?,?,?)";
+			Object[] params={type,title,content,linkman,phone,email,date,state,attention,typepid,userid};
+			i=myOp.OpUpdate(sql,params);
+			if(i<=0){
+				return INPUT;
+			}else{
+				return "insert success";
+			}
 		}
+		else{
+			sql="update tb_info set info_type = ?, info_title = ?, info_content = ?, info_linkman = ?, info_phone = ?, info_email = ?, info_date = ?, info_state = ?, info_attention = ?, info_typepid = ?,info_userid = ? where id = ?";
+			Object[] params={type,title,content,linkman,phone,email,date,state,attention,typepid,userid,id};
+			i=myOp.OpUpdate(sql,params);
+			if(i<=0){
+				return INPUT;
+			}else{
+				return "insert success";
+			}
+		}
+
 	}
 	
 
