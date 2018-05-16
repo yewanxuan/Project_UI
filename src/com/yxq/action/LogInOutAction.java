@@ -1,10 +1,16 @@
 package com.yxq.action;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.sun.deploy.net.HttpRequest;
+import com.sun.deploy.net.HttpResponse;
 import com.yxq.actionSuper.MySuperAction;
+import com.yxq.dao.DB;
 import com.yxq.dao.OpDB;
+import com.yxq.tools.DoString;
 import com.yxq.bean.AdminSingle;
 import com.yxq.bean.UserSingle;
-import com.yxq.tools.OS;
 
 public class LogInOutAction extends MySuperAction {	
 	protected UserSingle user;
@@ -47,25 +53,14 @@ public class LogInOutAction extends MySuperAction {
 	}
 	
 	public String UserLogin() {
-		String sql = "";
-		if (OS.getMacStatus()) {
-			sql = "select * from tb_user where name = '" + request.getParameter("user.id") +
-					"' and password='"+ request.getParameter("user.password") +"';";
-		} else {
-			sql = "select * from tb_user where id = '" + user.getId() +
-					"'and password='"+ user.getPassword() +"';";
-		}
+
+		String sql = "select * from tb_user where id = '" + user.getId() +
+				"'and password='"+ user.getPassword() +"';";
 		OpDB myOp= new OpDB();
 		Object []params = {};
 
 		if(myOp.LogOn(sql, params)){
-			String sqls = "";
-			if (OS.getMacStatus()){
-				sqls = "select * from tb_user where name = '" + request.getParameter("user.id") +"';" ;
-			} else
-			{
-				sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
-			}
+			String sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
 			user = myOp.OpUser(sqls, params);
 			session.put("loginUser",user);
 			session.put("loginUserId", user.getId());
@@ -100,13 +95,28 @@ public class LogInOutAction extends MySuperAction {
 	}
 	
 	public String UserAdd(){
-		String sql = "insert into  tb_user (id,password,email,phone,name) values (?,?,?,?,?);" ;
-		OpDB myOp= new OpDB();
-		Object []params = {user.getId(),user.getPassword(),user.getEmail(),user.getPhone(),user.getName()};
-		int i=myOp.OpUpdate(sql,params);
-		if(i<=0){
-			return INPUT;
-		}else{
+		OpDB myOp=new OpDB();
+
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String id = request.getParameter("id");
+
+		String sql = "select *from tb_user where id = '"+id+"';";
+		if(myOp.UserLogOn(sql, null)==false){
+			sql= "insert into  tb_user (id,password,email,phone,name) values (?,?,?,?,?);" ;
+			Object []params = {id,password,email,phone,name};
+			int i=myOp.OpUpdate(sql,params);
+			if(i<=0){
+				return INPUT;
+			}else{
+				return "login";
+			}
+		}
+		else{
+			
+			request.setAttribute("suggest", "该账户已存在，请直接登录");
 			return "login";
 		}
 	}
