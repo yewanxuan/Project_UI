@@ -44,25 +44,7 @@
     <div class="nav-center">
         <ul class="layui-nav" lay-filter="">
             <li class="layui-nav-item wd-nav-logo">
-                <a href="index.action">项目信息网</a>
-            </li>
-            <li class="layui-nav-item wd-nav-logo">
-	             <c:if test="${sessionScope.loginAdmin == null}">
-	                    <a href="log_isAdminLogin.action">管理员登录</a>
-	                </c:if>
-	                <c:if test="${sessionScope.loginAdmin != null}">
-	                    <a href="javascript:;">
-	                        <i class="layui-icon wd-user-avatar">&#xe612;</i>
-	                    </a>
-	                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
-	                        <dd><a href="">查封账户</a></dd>
-	                        <dd><a href="type_TypeShow.action">类别管理</a></dd>
-	                        <dd><a href="log_AdminLogout.action">退出登录</a></dd>
-	                    </dl>
-	                </c:if>
-            </li>
-            <li class="layui-nav-item wd-nav-login">
-                <c:if test="${sessionScope.loginUser == null}">
+				<c:if test="${sessionScope.loginUser == null}">
                     <a href="log_isLogin.action">登录</a>
                 </c:if>
                 <c:if test="${sessionScope.loginUser != null}">
@@ -76,15 +58,31 @@
                     </dl>
                 </c:if>
             </li>
+            <li class="layui-nav-item wd-nav-logo"><a href="index.action">首页</a></li>
+            <li class="layui-nav-item wd-nav-login">
+            	<c:if test="${sessionScope.loginAdmin == null}">
+	                 <a href="log_isAdminLogin.action">管理员      </a>
+	            </c:if>
+	            <c:if test="${sessionScope.loginAdmin != null}">
+	                 <a href="javascript:;">
+	                 	<i class="layui-icon wd-user-avatar">&#xe612;</i>
+	                 </a>
+	                 <dl class="layui-nav-child"> <!-- 二级菜单 -->
+	                     <dd><a href="">查封账户</a></dd>
+	                     <dd><a href="type_TypeShow.action">类别管理</a></dd>
+	                     <dd><a href="log_AdminLogout.action">退出登录</a></dd>
+	                 </dl>
+	             </c:if>	
+            </li>
 
             <span class="wd-nav-choise">
-                <c:forEach var="item" items="${sessionScope.typeMap}" end="4">
+                <c:forEach var="item" items="${sessionScope.typeMap}" end="5">
                     <li class="layui-nav-item"><a href="info_ListShow.action?infoType=${item.key}">${item.value}</a></li>
                 </c:forEach>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"> >> </a>
+                    <a href="javascript:;">></a>
                     <dl class="layui-nav-child">
-                        <c:forEach var="it" items="${sessionScope.typeMap}" begin="5" end="10">
+                        <c:forEach var="it" items="${sessionScope.typeMap}" begin="6" end="10">
                             <dd><a href="info_ListShow.action?infoType=${it.key}">${it.value}</a></dd>
                         </c:forEach>
                     </dl>
