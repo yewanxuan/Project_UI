@@ -66,6 +66,7 @@ public class LogInOutAction extends MySuperAction {
 			session.put("loginUserId", user.getId());
 			return SUCCESS;
 		} else {
+			request.setAttribute("suggest", "您输入的账号或密码不正确");
 			return INPUT;
 		}
 	}
@@ -111,6 +112,7 @@ public class LogInOutAction extends MySuperAction {
 			if(i<=0){
 				return INPUT;
 			}else{
+				request.setAttribute("suggest", "注册成功，欢迎登录");
 				return "login";
 			}
 		}
