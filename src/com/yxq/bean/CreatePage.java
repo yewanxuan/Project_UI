@@ -51,8 +51,8 @@ public class CreatePage {
 	public void setPageInfo(){
 		if(AllP>1){
 			PageInfo="<table border='0' cellpadding='3'><tr><td>";
-			PageInfo+="每页显示："+PerR+"/"+AllR+" 条记录！";
-			PageInfo+="当前页："+CurrentP+"/"+AllP+" 页！";
+			PageInfo+="共:"+PerR+"/"+AllR+" 条";
+			PageInfo+="   第:"+CurrentP+"/"+AllP+" 页";
 			PageInfo+="</td></tr></table>";			
 		}				
 	}
