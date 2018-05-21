@@ -18,7 +18,7 @@ public class IndexAction extends MySuperAction {
 	* */
 	static{
 		OpDB myOp=new OpDB();
-		String sql="select * from tb_type order by type_sign ";
+		String sql="select * from tb_type ";
 		typeMap=myOp.OpGetListBox(sql,null);
 		if(typeMap==null) {
 			typeMap=new TreeMap();
@@ -34,6 +34,15 @@ public class IndexAction extends MySuperAction {
 		
 	}
 
+	public void reload(){
+		OpDB myOp=new OpDB();
+		String sql="select * from tb_type";
+		typeMap=myOp.OpGetListBox(sql,null);
+		if(typeMap==null) {
+			typeMap=new TreeMap();
+		}
+		session.put("typeMap",typeMap);
+	}
 	/*
 	* homepage对应action，拿到列表信息和搜索条件
 	*
@@ -41,16 +50,20 @@ public class IndexAction extends MySuperAction {
 	public String execute() throws Exception {
 		/* 从数据库拿到教师的项目信息 */
 		OpDB myOp=new OpDB();
-		String sql1="select * from tb_info where (info_state='1') and (info_attention = '0') order by info_date desc";
+		String sql1="select  top 30 * from tb_info where (info_state='1') and (info_attention = '0') order by info_date desc";
 		List list=myOp.OpListShow(sql1,null);
 		request.setAttribute("attentionlist",list);
 //		session.put("attentionlist",list);
 
 		/* 从数据库中拿到学生的项目信息 */
-		String sql2="select * from tb_info where (info_state='1') and (info_attention = '1') order by info_date desc";
+		String sql2="select  top 30 * from tb_info where (info_state='1') and (info_attention = '1') order by info_date desc";
 		List list2=myOp.OpListShow(sql2,null);
-		request.setAttribute("allsublist",list2);
+		request.setAttribute("stusublist",list2);
 //		session.put("allsublist",list2);
+		
+		String sql3="select  top 30 * from tb_info where (info_state='1') and (info_attention = '2') order by info_date desc";
+		List list3=myOp.OpListShow(sql3,null);
+		request.setAttribute("threesublist",list3);
 
 		session.put("typeMap",typeMap);
 		session.put("searchMap",searchMap);
