@@ -65,10 +65,8 @@ public class InfoAction extends InfoSuperAction {
 			return "success";
 		}
 		else{
-
 			return "refresh";
 		}
-
 	}
 	
 	
@@ -80,11 +78,11 @@ public class InfoAction extends InfoSuperAction {
 		Object []params = {infoType};
 		String column = "info_type";
 		String type_pid = null;
-		
+		InfoSingle tipSingle = null;
 		if(tiptop!=null){
 			Object [] tiptopparams = {tiptop};
 			String sql="SELECT * from tb_info WHERE id = ?";
-			InfoSingle tipSingle = myOp.OpSingleShow(sql, tiptopparams);
+			tipSingle = myOp.OpSingleShow(sql, tiptopparams);
 			request.setAttribute("tipSingle", tipSingle);
 		}
 		
@@ -111,7 +109,7 @@ public class InfoAction extends InfoSuperAction {
 		String sqlFreeAll="SELECT * FROM tb_info WHERE ("+column+" = ?) AND (info_state='1') " 
 				 + info_attention + "ORDER BY info_attention ASC,info_date DESC";		
 		String sqlFreeSub="";
-		int perR=10;
+		int perR=20;
 		String CurrentP = request.getParameter("showpage");
 		String gowhich = null;
 		gowhich = "info_ListShow.action?infoType="+infoType;
@@ -136,6 +134,7 @@ public class InfoAction extends InfoSuperAction {
 		}
 		
 		List onelist = myOp.OpListShow(sqlFreeSub, params);
+		onelist.add(0, tipSingle);
 		request.setAttribute("attentionlist",onelist);
 		request.setAttribute("createpage", createPage);//这个是最后一行用的上的东西
 		
@@ -173,27 +172,30 @@ public class InfoAction extends InfoSuperAction {
 	/*
 	* 添加新的项目信息到数据库
 	* */
-	public String addInfo() {
+	public String addInfo() throws UnsupportedEncodingException {
 		OpDB myOp=new OpDB();
-		String addtype = request.getParameter("addType");
-		System.out.println("addtype is "+addtype);
+
 		Integer typepid = Integer.parseInt(request.getParameter("infoTypepid"));
 		Integer type = Integer.parseInt(request.getParameter("infoType"));
 		String title = request.getParameter("infoTitle");
+		title=new String(title.getBytes("8859_1"), "utf8");
 		String linkman = request.getParameter("infoPeople");
+		linkman=new String(linkman.getBytes("8859_1"), "utf8");
 		String phone = request.getParameter("infoPhone");
 		String email = request.getParameter("infoEmail");
 		String content = request.getParameter("infoContent");
+		content=new String(content.getBytes("8859_1"), "utf8");
 		String date=DoString.dateTimeChange(new java.util.Date());
 		String state="1";
 		String attention=request.getParameter("infoAttention");
 		String id = request.getParameter("id");
-
+		System.out.println("----------id is "+id+"--------------");
 		UserSingle user = (UserSingle)session.get("loginUser");
 		String userid = user.getId();
+
 		int i;
 		String sql = null;
-		if(true){
+		if(id==null||Integer.valueOf(id)==0){
 			sql="insert into tb_info(info_type, info_title, info_content, info_linkman, info_phone, info_email, info_date, info_state, info_attention, info_typepid,info_userid) values(?,?,?,?,?,?,?,?,?,?,?)";
 			Object[] params={type,title,content,linkman,phone,email,date,state,attention,typepid,userid};
 			i=myOp.OpUpdate(sql,params);
@@ -220,30 +222,13 @@ public class InfoAction extends InfoSuperAction {
 	public String SearchShow() throws UnsupportedEncodingException{
 
 		String subsql=request.getParameter("subsql");
-		String sqlvalue=null;
+		String sqlvalue=request.getParameter("sqlvalue");
 		UserSingle user = null;
-		if(subsql.equals("info_userid")){
-			if(session.get("loginUser")!=null){
-				user = (UserSingle) session.get("loginUser");
-				sqlvalue = user.getId();
-			}
-		}
-		else{
-			sqlvalue=request.getParameter("sqlvalue");	
-		}
+		sqlvalue= new String(sqlvalue.getBytes("8859_1"),"UTF-8");
 		String showType=request.getParameter("showType");
 		String type=request.getParameter("type");
 		if(showType==null)
 			showType="";
-		if(showType.equals("link")){
-			try {
-				sqlvalue=new String(sqlvalue.getBytes("ISO-8859-1"),"UTF-8");
-			} catch (UnsupportedEncodingException e) {			
-				sqlvalue="";
-				e.printStackTrace();
-			}
-		}
-		
 
 		String param="";
 		String opname="";
@@ -255,7 +240,7 @@ public class InfoAction extends InfoSuperAction {
 			opname=" = ";
 			param=sqlvalue;			
 		}
-		
+
 		List_for_show(subsql,opname,sqlvalue,type,param);
 		return "success";
 	}
@@ -263,11 +248,14 @@ public class InfoAction extends InfoSuperAction {
 	
 
 	private void List_for_show(String subsql,String opname,String sqlvalue,String type,String param){
+		
 		String sqlSearchAll="SELECT * FROM tb_info WHERE ("+subsql+opname+"?) ORDER BY info_date DESC";
+
+
 		String sqlSearchSub="";		
 		Object[] params={param};		
 
-		int perR=8;
+		int perR=20;
 		String strCurrentP=request.getParameter("showpage");
 		String gowhich = "info_SearchShow.action?subsql="+subsql+"&sqlvalue="+sqlvalue+"&type="+type+"&showType=link";
 		
@@ -326,88 +314,5 @@ public class InfoAction extends InfoSuperAction {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-
-	public void validateAdd(){
-		request.setAttribute("mainPage","/pages/add/addInfo.jsp");
-		String addType = request.getParameter("addType");
-		if(addType == null ||addType.equals("")){
-			addType="linkTo";
-		}
-		
-		if(addType.equals("add")){			
-			int type = infoSingle.getInfoType();
-			String title = infoSingle.getInfoTitle();
-			String content = infoSingle.getInfoContent();
-			String phone=infoSingle.getInfoPhone();
-			String linkman=infoSingle.getInfoLinkman();
-			String email=infoSingle.getInfoEmail();			
-			
-			boolean mark=true;			
-			if(type<=0){
-				mark=false;
-				addFieldError("typeError",getText("Project.info.no.infoType"));								
-			}
-			if(title==null||title.equals("")){
-				mark=false;
-				addFieldError("titleError",getText("Project.info.no.infoTitle"));
-			}
-			if(content==null||content.equals("")){
-				mark=false;
-				addFieldError("contentError",getText("Project.info.no.infoContent"));
-			}
-			if(phone==null||phone.equals("")){
-				mark=false;
-				addFieldError("phoneError",getText("Project.info.no.infoPhone"));
-			}
-			if(linkman==null||linkman.equals("")){
-				mark=false;
-				addFieldError("linkmanError",getText("Project.info.no.infoLinkman"));
-			}
-			if(email==null||email.equals("")){
-				mark=false;
-				addFieldError("emailError",getText("Project.info.no.infoEmail"));
-			}
-			if(mark){
-				String phoneRegex="(\\d{3}-)\\d{8}|(\\d{4}-)(\\d{7}|\\d{8})|\\d{11}";
-				if(phone.indexOf(",")<0){
-					if(!infoSingle.getInfoPhone().matches(phoneRegex)){
-						addFieldError("phoneError",getText("Project.info.format.infoPhone"));
-					}					
-				}
-				else{
-					String[] phones = phone.split(",");
-					for(int i=0;i<phones.length;i++){
-						if(!phones[i].matches(phoneRegex)){							
-							addFieldError("phoneError",getText("Project.info.format.infoPhone"));							
-							break;
-						}
-					}
-				}
-				String emailRegex="\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-				if(!infoSingle.getInfoEmail().matches(emailRegex)){
-					addFieldError("emailError",getText("Project.info.format.infoEmail"));
-				}				
-			}
-		}
-	}
-
-	public void validateSearchShow() {
-/*		request.setAttribute("mainPage","/pages/error.jsp");
-		String type=searchInfo.getType();
-		String subsql=searchInfo.getSubsql();
-		String sqlvalue=searchInfo.getSqlvalue();
-		
-		if(subsql==null||subsql.equals("")){
-			addFieldError("SearchNoC",getText("Project.info.search.no.condition"));
-		}
-		if(sqlvalue==null||sqlvalue.equals("")){
-			addFieldError("SearchNoV",getText("Project.info.search.no.value"));
-		}
-		if(type==null||type.equals("")){
-			addFieldError("SearchNoT",getText("Project.info.search.no.type"));
-		}
-*/
 	}
 }
