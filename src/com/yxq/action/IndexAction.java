@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import com.yxq.actionSuper.MySuperAction;
 import com.yxq.dao.OpDB;
 import com.yxq.bean.InfoSingle;
+import com.yxq.tools.OS;
 
 public class IndexAction extends MySuperAction {	
 	public static TreeMap typeMap;					
@@ -50,18 +51,32 @@ public class IndexAction extends MySuperAction {
 	public String execute() throws Exception {
 		/* 从数据库拿到教师的项目信息 */
 		OpDB myOp=new OpDB();
-		String sql1="select  top 30 * from tb_info where (info_state='1') and (info_attention = '0') order by info_date desc";
+		String sql1 = "";
+		String sql2 = "";
+		String sql3 = "";
+		if (OS.getMacStatus()){
+			sql1="select * from tb_info where (info_state='1') and (info_attention = '0') order by info_date desc limit 30";
+		} else {
+			sql1="select top 30 * from tb_info where (info_state='1') and (info_attention = '0') order by info_date desc";
+		}
 		List list=myOp.OpListShow(sql1,null);
 		request.setAttribute("attentionlist",list);
 //		session.put("attentionlist",list);
 
 		/* 从数据库中拿到学生的项目信息 */
-		String sql2="select  top 30 * from tb_info where (info_state='1') and (info_attention = '1') order by info_date desc";
+		if (OS.getMacStatus()){
+			sql2="select * from tb_info where (info_state='1') and (info_attention = '1') order by info_date desc limit 30";
+		}else{
+			sql2="select top 30 * from tb_info where (info_state='1') and (info_attention = '1') order by info_date desc";
+		}
 		List list2=myOp.OpListShow(sql2,null);
 		request.setAttribute("stusublist",list2);
 //		session.put("allsublist",list2);
-		
-		String sql3="select  top 30 * from tb_info where (info_state='1') and (info_attention = '2') order by info_date desc";
+		if (OS.getMacStatus()){
+			sql3="select * from tb_info where (info_state='1') and (info_attention = '2') order by info_date desc limit 30";
+		}else {
+			sql3="select top 30 * from tb_info where (info_state='1') and (info_attention = '2') order by info_date desc";
+		}
 		List list3=myOp.OpListShow(sql3,null);
 		request.setAttribute("threesublist",list3);
 

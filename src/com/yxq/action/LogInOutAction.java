@@ -54,14 +54,24 @@ public class LogInOutAction extends MySuperAction {
 	}
 	
 	public String UserLogin() {
-
-		String sql = "select * from tb_user where id = '" + user.getId() +
-				"'and password='"+ user.getPassword() +"';";
+		String sql = "";
+		String sqls = "";
+		if (OS.getMacStatus()) {
+			sql = "select * from tb_user where id = '" + request.getParameter("user.id") +
+					"'and password='"+ request.getParameter("user.password") +"';";
+		} else {
+			sql = "select * from tb_user where id = '" + user.getId() +
+					"'and password='"+ user.getPassword() +"';";
+		}
 		OpDB myOp= new OpDB();
 		Object []params = {};
 
 		if(myOp.LogOn(sql, params)){
-			String sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
+			if (OS.getMacStatus()) {
+				sqls = "select * from tb_user where id = '" + request.getParameter("user.id") +"';" ;
+			} else {
+				sqls = "select * from tb_user where id = '" + user.getId()+"';" ;
+			}
 			user = myOp.OpUser(sqls, params);
 			session.put("loginUser",user);
 			session.put("loginUserId", user.getId());

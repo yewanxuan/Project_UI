@@ -1,0 +1,56 @@
+body {
+    background-color: #eeeeee;
+}
+.container{
+    width: 1000px;
+    min-height: 600px;
+    margin: 70px auto 0;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+}
+.ad-card-header{
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+.ad-card-body{
+    width: 97%;
+    min-height: 300px;
+}
+.ad-input-block{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+.ad-button-block{
+    float: right;
+    margin-right: 20px;
+}
+.ad-layui-btn{
+    padding: 0 40px;
+}
+.comment{
+    width: 95%;
+    min-height: 30px;
+    margin: 0 auto;
+}
+.comment-item{
+    width: 100%;
+    border-top: 1px solid #dcdcdc;
+}
+.comment-item:hover{
+    -webkit-box-shadow: 0px 2px 1px 2px #bbbbbb;
+    -moz-box-shadow: 0px 2px 1px 2px #bbbbbb;
+    box-shadow: 0px 2px 1px 2px #bbbbbb;
+}
+.com-header{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+.com-body{
+    width: 100%;
+    height: 100px;
+}

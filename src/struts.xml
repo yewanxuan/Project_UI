@@ -32,8 +32,10 @@
         <action name="type_*" class="com.yxq.action.TypeAction" method="{1}">
 			<result name="success">/app/typepage.jsp</result>
        	</action>
+        <action name="thread_*" class="com.yxq.action.threadAction" method="{1}">
+            <result name="success">/app/threadDetail.jsp</result>
+        </action>
 
-      
     </package>
   </struts>
     

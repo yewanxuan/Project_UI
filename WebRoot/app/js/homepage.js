@@ -25,5 +25,6 @@ $(function () {
 })
 
 function viewInfoFun(id, typeid) {
-    location.href = 'info_ListShow.action?infoType='+typeid+'&tiptop='+id;
+    // location.href = 'info_ListShow.action?infoType='+typeid+'&tiptop='+id;
+    location.href = "thread_threadShow.action?threadId=" + id;
 }
