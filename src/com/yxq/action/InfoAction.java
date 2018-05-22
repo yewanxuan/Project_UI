@@ -107,7 +107,7 @@ public class InfoAction extends InfoSuperAction {
 		
 		/* 获取当前页要显示的免费信息 */
 		String sqlFreeAll="SELECT * FROM tb_info WHERE ("+column+" = ?) AND (info_state='1') " 
-				 + info_attention + "ORDER BY info_attention ASC,info_date DESC";		
+				 + info_attention + "ORDER BY info_date DESC";		
 		String sqlFreeSub="";
 		int perR=20;
 		String CurrentP = request.getParameter("showpage");
@@ -250,7 +250,7 @@ public class InfoAction extends InfoSuperAction {
 	private void List_for_show(String subsql,String opname,String sqlvalue,String type,String param){
 		
 		String sqlSearchAll="SELECT * FROM tb_info WHERE ("+subsql+opname+"?) ORDER BY info_date DESC";
-
+		System.out.println(sqlSearchAll+param);
 
 		String sqlSearchSub="";		
 		Object[] params={param};		
@@ -275,6 +275,8 @@ public class InfoAction extends InfoSuperAction {
 		}
 
 		List searchlist=myOp.OpListShow(sqlSearchSub, params);
+		//因为在前端的一个复用导致的，详见request.tipSingle的意义 好吧我也很绝望我之后再想想办法
+		searchlist.add(0,null);
 		request.setAttribute("attentionlist",searchlist);
 		request.setAttribute("createpage", createPage);
 		
