@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/assets/layui/css/layui.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css"> 
     <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/sendinfo.css"> 
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/index.css"> 
 
 </head>
 <body>
@@ -33,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            </c:if>
 	                        </c:forEach>
 	                    </select>
-	                     <input type="text" name="type_name" required  lay-verify="required" autocomplete="off" class="layui-input">
+	                     <input type="text" name="type_name"  placeholder="请输入二级目录类别"  required  lay-verify="required" autocomplete="off" class="layui-input">
 	                </div>
 	            </div>
 	            <div class="layui-form-item">
@@ -43,15 +44,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<c:forEach var="i" begin="1" end="11" step="1">  
                  <c:forEach var="typ" items="${typelist}">
-						<c:if test =  "${typ.type_pid == i}" >
+						<c:if test ="${typ.type_pid == i}" >
 							<c:if test = "${typ.id == i}">
-								<span>${typ.type_name}:</span><br>
+							   
+				                    <fieldset>
+				                        <legend>
+				                           <span>${typ.type_name}</span>
+				                        </legend>
+				                    </fieldset>
+				                
 							</c:if>
 							<c:if test =  "${typ.id != i}">
-								<span>${typ.type_name}</span>
-								 <span><a href="type_Edit.action?worktype=change&id=${typ.id}">修改</a></span>
-								 <span><a href="type_Edit.action?worktype=delete&id=${typ.id}">删除</a></span>
-								 <br>
+								<form class="layui-form wd-form" action="type_Edit.action">
+									<div class="layui-container">
+										<div class="layui-row">
+										    <div class="layui-col-md3">
+								                    <input type="text" name="type_name"  required value = "${typ.type_name}"
+								                     	lay-verify="required" autocomplete="off" class="layui-input">
+								                     <input type = "hidden" name ="id" value="${typ.id}" >
+								                     <input type = "hidden" name ="worktype" value="change" >
+										    </div>
+										    <div class="layui-col-md3">
+ 												<button class="layui-btn layui-btn-radius layui-btn-normal wd-button-submit" lay-submit>修改</button>
+						            			<span class="layui-btn layui-btn-radius layui-btn-normal wd-button-submit" ><a href="type_Edit.action?worktype=delete&id=${typ.id}">删除</a></span>
+										    </div>
+										    <div class="layui-col-md4">
+										    </div>
+										</div>
+						            </div>
+								 </form>
+
 							</c:if>
 						</c:if>
                 </c:forEach>	
