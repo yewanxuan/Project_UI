@@ -11,6 +11,7 @@ import com.yxq.dao.OpDB;
 import com.yxq.tools.DoString;
 import com.yxq.bean.AdminSingle;
 import com.yxq.bean.UserSingle;
+import com.yxq.tools.OS;
 
 public class LogInOutAction extends MySuperAction {	
 	protected UserSingle user;
