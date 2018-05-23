@@ -6,6 +6,9 @@ import com.yxq.dao.OpDB;
 import com.yxq.tools.OS;
 
 public class threadAction extends MySuperAction {
+    /*
+    * 帖子展示
+    * */
     public String threadShow(){
         OpDB myOp = new OpDB();
         InfoSingle infoSingle;
