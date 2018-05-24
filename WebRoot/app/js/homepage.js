@@ -28,3 +28,16 @@ function viewInfoFun(id, typeid) {
     // location.href = 'info_ListShow.action?infoType='+typeid+'&tiptop='+id;
     location.href = "thread_threadShow.action?threadId=" + id;
 }
+
+function deleteThread(id) {
+    console.log("id:" + id)
+    $.ajax({
+        type: 'post',
+        url: 'info_Edit.action',
+        data: id,
+        dataType: 'json',
+        success: function () {
+            console.log(data)
+        }
+    })
+}

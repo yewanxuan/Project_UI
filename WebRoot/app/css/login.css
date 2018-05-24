@@ -60,3 +60,7 @@ body {
     float: left;
     margin-bottom: 20px;
 }
+.ad-thread-btn{
+    cursor: pointer;
+    color: #009688;
+}

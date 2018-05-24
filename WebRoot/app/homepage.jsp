@@ -199,20 +199,33 @@
                                     <span>发布时间：</span>
                                     <span class="sendTime">${teh.infoDate}</span>
                                 </div>
-							    <div class="wd-colla-top">	
- 									<c:if test="${sessionScope.loginAdmin!=null}">
- 										 <span><a href=""><font color = "#009688">加精</font></a></span>
-                                         <span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>
+							    <div class="wd-colla-top">
+                                    <c:if test="${sessionScope.loginAdmin!=null}">
+                                        <span class="ad-thread-btn">加精</span>
+                                        <span class="ad-thread-btn" onclick="deleteThread(${teh.id})">删除</span>
                                     </c:if>
                                     <c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">
-                                         <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
-                                           	<span><a href="info_Edit.action?worktype=refresh&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">擦亮   </font></a></span>
-                                            <span><a href="info_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>
+                                        <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
+                                            <span class="ad-thread-btn">擦亮   </span>
+                                            <span class="ad-thread-btn">修改   </span>
                                             <c:if test="${sessionScope.loginAdmin==null}">
-                                            	<span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>
-                                         	</c:if>
-                                         </c:if>
-                                    </c:if>   
+                                                <span class="ad-thread-btn" onclick="deleteThread(${teh.id})">删除</span>
+                                            </c:if>
+                                        </c:if>
+                                    </c:if>
+                                <%--<c:if test="${sessionScope.loginAdmin!=null}">--%>
+ 										 <%--<span><a href=""><font color = "#009688">加精</font></a></span>--%>
+                                         <%--<span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>--%>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">--%>
+                                         <%--<c:if test="${sessionScope.loginUserId==teh.infoUserid}">--%>
+                                           	<%--<span><a href="info_Edit.action?worktype=refresh&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">擦亮   </font></a></span>--%>
+                                            <%--<span><a href="info_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>--%>
+                                            <%--<c:if test="${sessionScope.loginAdmin==null}">--%>
+                                            	<%--<span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>--%>
+                                         	<%--</c:if>--%>
+                                         <%--</c:if>--%>
+                                    <%--</c:if>   --%>
 	                            </div>
                                 <div class="wd-colla-center">${teh.infoContent}</div>
                                 <div class="wd-colla-bottom">

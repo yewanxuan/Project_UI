@@ -21,10 +21,12 @@ public class InfoAction extends InfoSuperAction {
 	public static TreeMap typeMap;
 
 	public String Edit(){
+		System.out.println("edit here");
+		request.setAttribute("data", "nothing");
 		OpDB myOp=new OpDB();
 		String worktype = request.getParameter("worktype");
 		String id = request.getParameter("id");
-		String infoType = request.getParameter("infotType");
+		String infoType = request.getParameter("infoType");
 		String subsql="info_userid";
 		UserSingle user = null;
 		String sqlvalue = null;
@@ -36,11 +38,10 @@ public class InfoAction extends InfoSuperAction {
 			sqlvalue = user.getId();
 		}
 		else{
-			sqlvalue = myOp.OpSingleShow("select *from tb_info where id = "+id+";", null).getInfoUserid();
+			sqlvalue = myOp.OpSingleShow("select * from tb_info where id = "+id+";", null).getInfoUserid();
 		}
 		System.out.println(sqlvalue);
-		String param=sqlvalue;	
-
+		String param=sqlvalue;
 		
 		if(worktype.equals("refresh")){
 			System.out.println(id);
@@ -50,12 +51,12 @@ public class InfoAction extends InfoSuperAction {
 			myOp.OpUpdate(sql,params);
 		}
 		if(worktype.equals("delete")){
-			String sql = "delete from tb_info  where id = ?";
+			String sql = "delete from tb_info where id = ?";
 			Object []params = {id};
 			myOp.OpUpdate(sql,params);
 		}
 		if(worktype.equals("change")){
-			String sql = "select *from tb_info where id = ?";
+			String sql = "select * from tb_info where id = ?";
 			Object []params = {id};
 			InfoSingle infoSingle = myOp.OpSingleShow(sql, params);
 			request.setAttribute("infoSingle", infoSingle);
