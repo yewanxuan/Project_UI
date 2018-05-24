@@ -1,0 +1,31 @@
+USE [db_ProjectInfo]
+GO
+
+/****** Object:  Table [dbo].[tb_comment]    Script Date: 05/24/2018 20:19:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tb_comment](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[req_userid] [varchar](12) NOT NULL,
+	[rsp_userid] [varchar](12) NOT NULL,
+	[info_id] [int] NOT NULL,
+	[req_date] [datetime] NOT NULL,
+	[detail] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_tb_comment] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
