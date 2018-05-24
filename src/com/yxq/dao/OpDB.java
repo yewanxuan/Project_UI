@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import com.yxq.bean.CommentSingle;
 import com.yxq.bean.TypeSingle;
 import com.yxq.bean.InfoSingle;
 import com.yxq.bean.CreatePage;
@@ -23,6 +24,7 @@ public class OpDB {
 	public int OpUpdate(String sql,Object[]params){
 		int i = -1;
 		mydb.doPstm(sql, params);
+		System.out.println(sql);
 		try{
 			i = mydb.getCount();
 			System.out.println(i+"has been changed");
@@ -85,7 +87,9 @@ public class OpDB {
 					infoSingle.setInfoState(rs.getString("info_state"));
 					infoSingle.setInfoAttention(rs.getString("info_attention"));
 					infoSingle.setInfoTypepid(rs.getInt("info_typepid"));
-					infoSingle.setInfoUserid(rs.getString("info_userid"));
+					if(rs.getString("info_userid")!=null){
+						infoSingle.setInfoUserid(rs.getString("info_userid").trim());
+					}
 					onelist.add(infoSingle);
 				}
 			}
@@ -98,7 +102,6 @@ public class OpDB {
 		return onelist;		
 	}
 	
-
 	public List OpListsublevel(String sql, Object[] sublevelparams){
 		List subtypelist = new ArrayList();
 		mydb.doPstm(sql, sublevelparams);
@@ -112,6 +115,7 @@ public class OpDB {
 					type.setType_pid(rs.getInt("type_pid"));
 					type.setType_name(rs.getString("type_name"));
 					type.setType_sign(rs.getInt("type_sign"));
+					//System.out.println("TypeSingle is"+type.getId()+"  "+type.getType_pid()+type.getType_name());
 					subtypelist.add(type);					
 				}
 			}
@@ -125,6 +129,35 @@ public class OpDB {
 		
 	}
 	
+	public List OpListComment(String sql, Object[] sublevelparams){
+		List commentlist = new ArrayList();
+		mydb.doPstm(sql, sublevelparams);
+		try{
+			ResultSet rs=mydb.getRs();
+			if(rs!=null){
+				while(rs.next()){
+					CommentSingle comment=new CommentSingle();
+					//System.out.println(""+rs.getInt("id")+rs.getInt("type_pid")+rs.getString("type_name"));
+					comment.setId(rs.getInt("id"));
+					comment.setReqUserid(rs.getString("req_userid"));
+					comment.setRspUserid(rs.getString("rsp_userid"));
+					comment.setInfoId(rs.getInt("info_id"));
+					comment.setDetail(rs.getString("detail"));
+					comment.setReqDate(rs.getDate("req_date"));
+					System.out.println("CommentSingle is"+comment.getId()+comment.getReqUserid()+comment.getRspUserid()+comment.getDetail()+comment.getReqDate()+comment.getInfoId());
+					commentlist.add(comment);					
+				}
+			}
+			rs.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally{
+			mydb.closed();			
+		}
+		return commentlist;	
+		
+	}
+	
 	
 	public TreeMap OpGetListBox(String sql,Object []params){
 		TreeMap typeMap = new TreeMap();
@@ -133,7 +166,7 @@ public class OpDB {
 		try {
 			ResultSet rs = mydb.getRs();
 			while(rs.next()){
-				typeMap.put(rs.getInt("type_sign"), rs.getString("type_name"));
+				typeMap.put(rs.getInt("id"), rs.getString("type_name"));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -191,6 +224,8 @@ public class OpDB {
 				userSingle.setPhone(rs.getString("phone"));
 				userSingle.setPassword(rs.getString("password"));
 				userSingle.setEmail(rs.getString("email"));
+				System.out.println("UserSingle is "+userSingle.getId()+userSingle.getName()
+						+userSingle.getPassword()+userSingle.getEmail());
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -212,14 +247,16 @@ public class OpDB {
 				infoSingle.setId(rs.getInt("id"));
 				infoSingle.setInfoType(rs.getInt("info_type"));
 				infoSingle.setInfoTitle(rs.getString("info_title"));
-				infoSingle.setInfoContent(rs.getString("info_content"));
+				infoSingle.setInfoContent(rs.getString("info_content").trim());
 				infoSingle.setInfoLinkman(rs.getString("info_linkman"));
 				infoSingle.setInfoPhone(rs.getString("info_phone"));
 				infoSingle.setInfoEmail(rs.getString("info_email"));
 				infoSingle.setInfoDate(DoString.dateTimeChange(rs.getTimestamp("info_date")));
 				infoSingle.setInfoState(rs.getString("info_state"));
 				infoSingle.setInfoAttention(rs.getString("info_attention"));
+				infoSingle.setInfoUserid(rs.getString("info_userid"));
 			}
+			System.out.println("InfoSingle is "+infoSingle.getId()+infoSingle.getInfoContent());
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
