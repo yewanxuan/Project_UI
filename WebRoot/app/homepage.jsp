@@ -217,6 +217,7 @@ function deleteReg(id){
 		                                     <font  face="arial" color="#c2c2c2">${attentItem.value}</font>   
 		                                </c:if>
 		                        </c:forEach>
+		                        <a href = "thread_threadShow.action?threadId='${teh.id}'">展开评论</a>
                            	</h2>
 						
 							<c:choose>
