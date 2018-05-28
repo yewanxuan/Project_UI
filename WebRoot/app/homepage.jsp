@@ -25,7 +25,40 @@
     attentMap.put("","全部");
     session.setAttribute("attentMap",attentMap);
 %>
+<script>
+function refreshReg(id){
+     $.ajax({
+            type:'post',
+            url:'${pageContext.request.contextPath }/info_Edit.action',
+            data:{
+                "id":id,
+                "worktype":"refresh"
+            },
+            success:function(data){
+                    alert("擦亮成功");
+                    location.reload();                  
+            }
+    })
+}
 
+function deleteReg(id){
+     $.ajax({
+            type:'post',
+            url:'${pageContext.request.contextPath }/info_Edit.action',
+            data:{
+                "id":id,
+                "worktype":"delete"
+            },
+            success:function(data){
+                    alert("删除成功");
+                    $("#tr_"+id).remove();//主要就是这个删除成功后移除这行数据
+            }
+    })
+}
+
+
+
+</script>
 <html>
 <head>
     <title>项目信息网</title>
@@ -171,8 +204,8 @@
 						</c:if>
                     	
                         <c:if test="${requestScope.tipSingle!=null||status.index != 0}">
-                        <div class="layui-colla-item">
-                         	<h2 class="layui-colla-title"> 
+                        <div class="layui-colla-item" id="tr_${teh.id}">
+                         	<h2 class="layui-colla-title" > 
 
 	                            <c:forEach var="typeItem" items="${sessionScope.typeMap}">
 	                                <c:if test="${typeItem.key == teh.infoType}">
@@ -184,48 +217,36 @@
 		                                     <font  face="arial" color="#c2c2c2">${attentItem.value}</font>   
 		                                </c:if>
 		                        </c:forEach>
+		                        <a href = "thread_threadShow.action?threadId='${teh.id}'">展开评论</a>
                            	</h2>
 						
 							<c:choose>
 							    <c:when test="${requestScope.tipSingle!=null&&status.index == 0}">
-							       	<div class="layui-colla-content layui-show">
+							       	<div class="layui-colla-content layui-show" >
 							    </c:when>
 							    <c:otherwise>
-							       <div class="layui-colla-content">
+							       <div class="layui-colla-content" ">
 							    </c:otherwise>
 							</c:choose>
 
-                                <div class="wd-colla-top">
+                                <div class="wd-colla-top" id ="time_${teh.id}" >
                                     <span>发布时间：</span>
                                     <span class="sendTime">${teh.infoDate}</span>
                                 </div>
-							    <div class="wd-colla-top">
-                                    <c:if test="${sessionScope.loginAdmin!=null}">
-                                        <span class="ad-thread-btn">加精</span>
-                                        <span class="ad-thread-btn" onclick="deleteThread(${teh.id})">删除</span>
+							    <div class="wd-colla-top">	
+ 									<c:if test="${sessionScope.loginAdmin!=null}">
+ 										 <span><a href=""><font color = "#009688">加精</font></a></span>
+                                         <span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>
                                     </c:if>
                                     <c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">
-                                        <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
-                                            <span class="ad-thread-btn">擦亮   </span>
-                                            <span class="ad-thread-btn">修改   </span>
-                                            <c:if test="${sessionScope.loginAdmin==null}">
-                                                <span class="ad-thread-btn" onclick="deleteThread(${teh.id})">删除</span>
-                                            </c:if>
-                                        </c:if>
-                                    </c:if>
-                                <%--<c:if test="${sessionScope.loginAdmin!=null}">--%>
- 										 <%--<span><a href=""><font color = "#009688">加精</font></a></span>--%>
-                                         <%--<span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">--%>
-                                         <%--<c:if test="${sessionScope.loginUserId==teh.infoUserid}">--%>
-                                           	<%--<span><a href="info_Edit.action?worktype=refresh&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">擦亮   </font></a></span>--%>
-                                            <%--<span><a href="info_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>--%>
-                                            <%--<c:if test="${sessionScope.loginAdmin==null}">--%>
-                                            	<%--<span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>--%>
-                                         	<%--</c:if>--%>
-                                         <%--</c:if>--%>
-                                    <%--</c:if>   --%>
+                                         <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
+                                           	<%-- <span><a href="info_Edit.action?worktype=refresh&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">擦亮   </font></a></span> --%>
+                                            <span><a href="info_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>
+                                            <%--  <span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span> --%>
+                                         	<span><a href="javascript:" onclick="refreshReg('${teh.id}')"><font color ="#009688">擦亮</font></a></span>
+                                         	<span><a href="javascript:" onclick="deleteReg('${teh.id}')"><font color ="#009688">删除</font></a></span>
+                                         </c:if>
+                                    </c:if>   
 	                            </div>
                                 <div class="wd-colla-center">${teh.infoContent}</div>
                                 <div class="wd-colla-bottom">
