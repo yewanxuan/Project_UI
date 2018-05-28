@@ -46,16 +46,17 @@
                 </legend>
             </fieldset>
         </div>
-        <div class="comment">
-        	 <c:forEach var="comm" items="${requestScope.commentlist}" >
-	            <div class="comment-item">
+        <ul class="comment" id="commentID">
+        	 <c:forEach var="comm" items="${requestScope.commentlist}" varStatus="status">
+	            <li class="comment-item">
 	                <div class="com-header">
                         <span>${comm.reqUserid}回复 ${comm.rspUserid}</span>
                         <span class="com-date">发表于：${comm.reqDate}</span>
+                        <span>index:${status.index}</span>
                     </div>
 	                <div class="com-body">${comm.detail}</div>
                     <div class="com-reply">
-                        <span class="reply-obj">回复</span>
+                        <span class="reply-obj" onclick="showReplyFoo(${status.index})">回复</span>
                     </div>
 	                <div class="com-tail">
 	                	<form class="layui-form" action="thread_sendComment.action">
@@ -66,9 +67,9 @@
 	                    	<button class="layui-btn ad-layui-btn" lay-submit lay-filter="formReply">我要回复</button>
 	                	</form>
 	                </div>
-	            </div>
+	            </li>
             </c:forEach>
-        </div>
+        </ul>
     </div>
     <jsp:include page="components/footer.jsp"></jsp:include>
 
@@ -93,10 +94,10 @@
                 // return false;
             });
             
-            $('.reply-obj').click(function () {
-                var obj = this.parentNode;
-                console.log($(this.parentNode + '+.com-tail'))
-            })
+            // $('.reply-obj').click(function () {
+            //     var obj = this.parentNode;
+            //     console.log($(this.parentNode + '+.com-tail'))
+            // })
         });
     </script>
 </body>

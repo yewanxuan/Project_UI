@@ -29,6 +29,10 @@ body {
 }
 .ad-layui-btn{
     padding: 0 40px;
+    position: relative;
+    right: 0px;
+    top: 5px;
+    float: right;
 }
 .comment{
     width: 95%;
