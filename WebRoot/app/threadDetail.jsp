@@ -49,20 +49,25 @@
         <div class="comment">
         	 <c:forEach var="comm" items="${requestScope.commentlist}" >
 	            <div class="comment-item">
-	                <div class="com-header">${comm.reqUserid}回复 ${comm.rspUserid}</div>
+	                <div class="com-header">
+                        <span>${comm.reqUserid}回复 ${comm.rspUserid}</span>
+                        <span class="com-date">发表于：${comm.reqDate}</span>
+                    </div>
 	                <div class="com-body">${comm.detail}</div>
+                    <div class="com-reply">
+                        <span class="reply-obj">回复</span>
+                    </div>
 	                <div class="com-tail">
 	                	<form class="layui-form" action="thread_sendComment.action">
 		                	<input type="hidden" name = "req_userid" value="${sessionScope.loginUserId}">
 		                	<input type="hidden" name = "info_id" value = "${sessionScope.commentSingle.id}">
 		                	<input type="hidden" name = "rsp_userid" value="${comm.reqUserid}">
 	                    	<textarea name="detail" placeholder="请输入评论内容" class="layui-textarea"></textarea>
-	                    	<button class="layui-btn ad-layui-btn" lay-submit lay-filter="formComment">我要回复</button>
+	                    	<button class="layui-btn ad-layui-btn" lay-submit lay-filter="formReply">我要回复</button>
 	                	</form>
 	                </div>
 	            </div>
             </c:forEach>
-
         </div>
     </div>
     <jsp:include page="components/footer.jsp"></jsp:include>
@@ -71,13 +76,27 @@
     <script src="<%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
     <script src="<%= request.getContextPath()%>/app/js/threadDetail.js"></script>
     <script>
-        layui.use('form', function(){
+        layui.use(['form', 'element'], function(){
             var form = layui.form;
+            var elemment = layui.element;
+
+            $('.com-tail').hide()
+
             //监听提交
             form.on('submit(formComment)', function(data){
                 layer.msg(JSON.stringify(data.field));
                 // return false;
             });
+
+            form.on('submit(formReply)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                // return false;
+            });
+            
+            $('.reply-obj').click(function () {
+                var obj = this.parentNode;
+                console.log($(this.parentNode + '+.com-tail'))
+            })
         });
     </script>
 </body>

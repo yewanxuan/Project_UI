@@ -40,9 +40,9 @@ body {
     border-top: 1px solid #dcdcdc;
 }
 .comment-item:hover{
-    -webkit-box-shadow: 0px 2px 1px 2px #bbbbbb;
-    -moz-box-shadow: 0px 2px 1px 2px #bbbbbb;
-    box-shadow: 0px 2px 1px 2px #bbbbbb;
+    -webkit-box-shadow: 0px 2px 7px 1px #bbbbbb;
+    -moz-box-shadow: 0px 2px 7px 1px #bbbbbb;
+    box-shadow: 0px 2px 7px 1px #bbbbbb;
 }
 .com-header{
     width: 100%;
@@ -52,5 +52,25 @@ body {
 }
 .com-body{
     width: 100%;
-    height: 100px;
+    min-height: 40px;
+}
+.com-tail{
+    /*display: none;*/
+}
+.com-reply{
+    width: 100%;
+    height: 30px;
+}
+.com-reply span{
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    right: 20px;
+}
+.com-date{
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #acacac;
 }

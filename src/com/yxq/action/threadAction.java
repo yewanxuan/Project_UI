@@ -43,8 +43,9 @@ public class threadAction extends MySuperAction {
 		Object []params = {req_userid,rsp_userid,info_id,detail,date};
 		System.out.println(req_userid+rsp_userid+info_id+detail+date);
     	myOp.OpUpdate(sql, params);
-    	
-        String sqlmore = "select *from tb_comment where info_id = "+info_id;
+
+    	System.out.println("detail:"+detail);
+        String sqlmore = "select * from tb_comment where info_id = "+info_id + "ORDER BY info_date DESC";
         List commentlist = myOp.OpListComment(sqlmore,null);
         request.setAttribute("commentlist",commentlist);
         return "success";
