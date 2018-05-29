@@ -30,7 +30,7 @@ body {
 .ad-layui-btn{
     padding: 0 40px;
     position: relative;
-    right: 0px;
+    right: 20px;
     top: 5px;
     float: right;
 }
@@ -77,4 +77,12 @@ body {
     margin-left: 20px;
     font-size: 14px;
     color: #acacac;
+}
+.clearBoth{
+    clear: both;
+    margin-bottom: 10px;
+}
+.ad-thread-textarea{
+    width: 96%;
+    margin: 0 auto;
 }

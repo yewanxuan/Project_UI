@@ -52,7 +52,7 @@
 	                <div class="com-header">
                         <span>${comm.reqUserid}回复 ${comm.rspUserid}</span>
                         <span class="com-date">发表于：${comm.reqDate}</span>
-                        <span>index:${status.index}</span>
+                        <%--<span>index:${status.index}</span>--%>
                     </div>
 	                <div class="com-body">${comm.detail}</div>
                     <div class="com-reply">
@@ -63,9 +63,10 @@
 		                	<input type="hidden" name = "req_userid" value="${sessionScope.loginUserId}">
 		                	<input type="hidden" name = "info_id" value = "${sessionScope.commentSingle.id}">
 		                	<input type="hidden" name = "rsp_userid" value="${comm.reqUserid}">
-	                    	<textarea name="detail" placeholder="请输入评论内容" class="layui-textarea"></textarea>
+	                    	<textarea name="detail" placeholder="请输入评论内容" class="layui-textarea ad-thread-textarea"></textarea>
 	                    	<button class="layui-btn ad-layui-btn" lay-submit lay-filter="formReply">我要回复</button>
-	                	</form>
+	                	    <div class="clearBoth"></div>
+                        </form>
 	                </div>
 	            </li>
             </c:forEach>
