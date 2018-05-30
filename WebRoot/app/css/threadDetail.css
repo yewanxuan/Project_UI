@@ -16,7 +16,8 @@ body {
 }
 .ad-card-body{
     width: 97%;
-    min-height: 180px;
+    min-height: 160px;
+    padding-bottom: 30px;
     word-break: break-all;
 }
 .ad-input-block{
@@ -42,13 +43,13 @@ body {
 }
 .comment-item{
     width: 100%;
-    padding: 0 5px;
+    padding: 0 5px 5px;
     border-top: 1px solid #dcdcdc;
 }
 .comment-item:hover{
-    -webkit-box-shadow: 0px 2px 7px 1px #bbbbbb;
-    -moz-box-shadow: 0px 2px 7px 1px #bbbbbb;
-    box-shadow: 0px 2px 7px 1px #bbbbbb;
+    -webkit-box-shadow: 0px 1px 20px 1px #bbbbbb;
+    -moz-box-shadow: 0px 1px 20px 1px #bbbbbb;
+    box-shadow: 0px 1px 20px 1px #bbbbbb;
 }
 .com-header{
     width: 100%;
