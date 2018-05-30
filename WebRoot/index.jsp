@@ -4,7 +4,7 @@
         if (isPC()) {
             window.location.href = 'index.action';
         } else {
-            console.log('this is mobile device');
+            window.location.href = 'wapIndex.action'
         }
     })();
 

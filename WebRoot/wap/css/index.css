@@ -1,0 +1,123 @@
+body {
+    background-color: #eeeeee;
+}
+.content{
+    width: 100%;
+    min-height: 814px;
+    margin: 60px auto 0;
+    padding-top: 2px;
+    background-color: #ffffff;
+}
+.slideImg{
+    width: 100%;
+    height: 180px !important;
+}
+.slideImgDiv{
+    width: 100%;
+    height: auto;
+}
+.slideImgDiv img{
+    width: 100%;
+    height: auto;
+}
+.searchArea{
+    width: 90%;
+    min-height: 120px;
+    margin: 11px auto 0;
+}
+.contentRight{
+    width: 100%;
+    text-align: center;
+    min-height: 423px;
+    margin-bottom: 30px;
+    border-left: 1px solid #ebebeb;
+}
+.contentRight:after{
+    content: '';
+    display: inline-block;
+    clear: both;
+}
+.subListArea{
+    margin: 30px auto;
+    width: 100%;
+}
+.wd-search-form-item{
+    width: 40%;
+    display: inline-block;
+}
+.wd-fileter-form-item{
+    position: relative;
+    top: -2px;
+    width: 15%;
+    margin-left: 5px;
+    display: inline-block;
+}
+.typeLabel{
+    font-size: 12px;
+    margin: 0 10px 0 0;
+}
+.wd-form-label{
+    width: 50px;
+    padding: 9px 0;
+}
+.wd-input-block{
+    margin-left: 60px;
+}
+.wd-btn-block{
+    margin-left: 0px;
+}
+.wd-collapse{
+    text-align: left;
+    width: 95%;
+    margin: 10px auto 50px;
+}
+.clearBoth{
+    clear: both;
+}
+
+.wd-main-header{
+    width: 90%;
+    height: 42px;
+    line-height: 42px;
+    padding: 0 15px 0 15px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid #e6e6e6;
+}
+.wd-main-content{
+    width: 90%;
+    line-height: 32px;
+    padding: 0 15px 0 15px;
+    margin: 0px auto;
+    background-color: #ffffff;
+    font-size: 14px;
+    text-align: left;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+}
+.info-content-ul li{
+    cursor: pointer;
+    position: relative;
+    left: 17px;
+    list-style-type: square;
+}
+.wd-colla-top{
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-align: right;
+}
+.wd-colla-center{
+    font-size: 16px;
+}
+.wd-colla-bottom{
+    margin-top: 20px;
+    font-size: 10px;
+}
+.wd-bottom-area{
+    width: 33%;
+    display: inline-block;
+}
+

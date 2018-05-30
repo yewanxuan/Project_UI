@@ -5,9 +5,14 @@
 <struts>
 	<package name="com.yxq.action" extends="struts-default">
 
-        <!-- 访问首页 -->
+        <!-- web访问首页 -->
         <action name="index" class="com.yxq.action.IndexAction">
         	<result>/app/homepage.jsp</result>
+        </action>
+
+        <!--h5访问首页-->
+        <action name="wapIndex" class="com.yxq.action.IndexAction">
+            <result>/wap/homepage.jsp</result>
         </action>
 
         <!-- 前台信息处理 -->
@@ -18,7 +23,8 @@
             <result name="insert success" type="redirectAction">index</result>
             <result name="refresh">/app/homepage.jsp</result>
         </action>
-        
+
+        <!--web登录注册-->
         <action name="log_*" class="com.yxq.action.LogInOutAction" method="{1}">
 			<result name="input">/app/login.jsp</result>
 			<result name="login">/app/login.jsp</result>
@@ -26,8 +32,18 @@
             <result name="register_success">/app/login.jsp</result>
 			<result name="logout" type="redirectAction">index</result>
 			<result name="admininput">/app/AdminLogin.jsp</result>
-			<result name="adminlogin" type="chain">index</result> 
+			<result name="adminlogin" type="chain">index</result>
        	</action>
+        <!--h5登录注册-->
+        <action name="wapLog_*" class="com.yxq.action.LogInOutAction" method="{1}">
+            <result name="input">/wap/login.jsp</result>
+            <result name="login">/wap/login.jsp</result>
+            <result name="success" type="chain">wapIndex</result>
+            <result name="register_success">/wap/login.jsp</result>
+            <result name="logout" type="redirectAction">wapIndex</result>
+            <result name="admininput">/wap/AdminLogin.jsp</result>
+            <result name="adminlogin" type="chain">wapIndex</result>
+        </action>
 
         <action name="type_*" class="com.yxq.action.TypeAction" method="{1}">
 			<result name="success">/app/typepage.jsp</result>
