@@ -2,7 +2,7 @@ body {
     background-color: #eeeeee;
 }
 .container{
-    width: 1000px;
+    width: 100%;
     min-height: 600px;
     margin: 70px auto 0;
     padding-bottom: 30px;
@@ -15,10 +15,12 @@ body {
     font-size: 20px;
 }
 .ad-card-body{
-    width: 97%;
+    width: 92%;
     min-height: 160px;
     padding-bottom: 30px;
+    margin: 0 auto;
     word-break: break-all;
+    padding: 0px !important;
 }
 .ad-input-block{
     margin-left: 20px;
@@ -42,7 +44,7 @@ body {
     margin: 0 auto;
 }
 .comment-item{
-    width: 100%;
+    width: 98%;
     padding: 0 5px 5px;
     border-top: 1px solid #dcdcdc;
 }
@@ -89,4 +91,7 @@ body {
 .ad-thread-textarea{
     width: 96%;
     margin: 0 auto;
+}
+.ad-btn-send-reply{
+    right: 0px;
 }

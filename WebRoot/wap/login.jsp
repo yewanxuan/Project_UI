@@ -20,7 +20,7 @@
     <div class="loginFrame">
         <div class="loginArea">
             <div class="loginTitle"><span class="userLogin blueFont">登录</span> / <span class="userRegister">注册</span></div>
-			<s2:form action="log_UserLogin.action" theme="simple" >
+			<s2:form action="waplog_UserLogin.action" theme="simple" >
                 <div class="layui-form-item">
                     <div class="layui-input-block wd-input-block">
                         <input type="text" name="user.id" required  lay-verify="required" placeholder="请输入学工号" autocomplete="off" class="layui-input">

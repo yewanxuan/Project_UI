@@ -5,6 +5,7 @@ $(function () {
     var infoList = $(".infoListArea");
     var subList = $(".subListArea");
     var listObj = $(".listArea");
+
     //alert(test);
     // 决定是显示主页还是显示对应列表
     if (tests.indexOf("info_ListShow")>=0) {
@@ -26,14 +27,14 @@ $(function () {
 
 function viewInfoFun(id, typeid) {
     // location.href = 'info_ListShow.action?infoType='+typeid+'&tiptop='+id;
-    location.href = "thread_threadShow.action?threadId=" + id;
+    location.href = "wapthread_threadShow.action?threadId=" + id;
 }
 
 function deleteThread(id) {
     console.log("id:" + id)
     $.ajax({
         type: 'post',
-        url: 'info_Edit.action',
+        url: 'wapinfo_Edit.action',
         data: id,
         dataType: 'json',
         success: function () {

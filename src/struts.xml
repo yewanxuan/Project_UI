@@ -11,17 +11,26 @@
         </action>
 
         <!--h5访问首页-->
-        <action name="wapIndex" class="com.yxq.action.IndexAction">
+        <action name="wapindex" class="com.yxq.action.IndexAction">
             <result>/wap/homepage.jsp</result>
         </action>
 
-        <!-- 前台信息处理 -->
+        <!-- web前台信息处理 -->
         <action name="info_*" class="com.yxq.action.InfoAction" method="{1}">
             <!-- <result>/app/sendInfo.jsp</result> -->
             <result name="success">/app/homepage.jsp</result>
             <result name="input">/app/sendInfo.jsp</result>
             <result name="insert success" type="redirectAction">index</result>
             <result name="refresh">/app/homepage.jsp</result>
+        </action>
+
+        <!-- h5前台信息处理 -->
+        <action name="wapinfo_*" class="com.yxq.action.InfoAction" method="{1}">
+            <!-- <result>/app/sendInfo.jsp</result> -->
+            <result name="success">/wap/homepage.jsp</result>
+            <result name="input">/wap/sendInfo.jsp</result>
+            <result name="insert success" type="redirectAction">wapindex</result>
+            <result name="refresh">/wap/homepage.jsp</result>
         </action>
 
         <!--web登录注册-->
@@ -35,21 +44,27 @@
 			<result name="adminlogin" type="chain">index</result>
        	</action>
         <!--h5登录注册-->
-        <action name="wapLog_*" class="com.yxq.action.LogInOutAction" method="{1}">
+        <action name="waplog_*" class="com.yxq.action.LogInOutAction" method="{1}">
             <result name="input">/wap/login.jsp</result>
             <result name="login">/wap/login.jsp</result>
-            <result name="success" type="chain">wapIndex</result>
+            <result name="success" type="chain">wapindex</result>
             <result name="register_success">/wap/login.jsp</result>
-            <result name="logout" type="redirectAction">wapIndex</result>
+            <result name="logout" type="redirectAction">wapindex</result>
             <result name="admininput">/wap/AdminLogin.jsp</result>
-            <result name="adminlogin" type="chain">wapIndex</result>
+            <result name="adminlogin" type="chain">wapindex</result>
         </action>
 
         <action name="type_*" class="com.yxq.action.TypeAction" method="{1}">
 			<result name="success">/app/typepage.jsp</result>
        	</action>
+
+        <!--web-->
         <action name="thread_*" class="com.yxq.action.threadAction" method="{1}">
             <result name="success">/app/threadDetail.jsp</result>
+        </action>
+        <!--h5-->
+        <action name="wapthread_*" class="com.yxq.action.threadAction" method="{1}">
+            <result name="success">/wap/threadDetail.jsp</result>
         </action>
 
     </package>

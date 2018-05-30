@@ -10,10 +10,11 @@
 <html>
 <head>
     <title>项目信息网</title>
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/assets/layui/css/layui.css">
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css">
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/public.css">
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/threadDetail.css">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/assets/layui/css/layui.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/public/reset.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/public/public.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/threadDetail.css">
 </head>
 <body>
     <jsp:include page="components/header.jsp"></jsp:include>
@@ -34,7 +35,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block ad-button-block">
-                    <button class="layui-btn ad-layui-btn" lay-submit lay-filter="formComment">发 表</button>
+                    <button class="layui-btn ad-layui-btn ad-btn-send-reply" lay-submit lay-filter="formComment">发 表</button>
                 </div>
             </div>
         </form>
@@ -74,9 +75,9 @@
     </div>
     <jsp:include page="components/footer.jsp"></jsp:include>
 
-    <script src="<%= request.getContextPath()%>/app/js/public/jquery-3.2.1.min.js"></script>
-    <script src="<%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
-    <script src="<%= request.getContextPath()%>/app/js/threadDetail.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/js/public/jquery-3.2.1.min.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/assets/layui/layui.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/js/threadDetail.js"></script>
     <script>
         layui.use(['form', 'element'], function(){
             var form = layui.form;

@@ -82,20 +82,20 @@
         <ul class="layui-nav" lay-filter="">
             <li class="layui-nav-item wd-nav-logo">
 				<c:if test="${sessionScope.loginUser == null}">
-                    <a href="wapLog_isLogin.action">登录</a>
+                    <a href="waplog_isLogin.action">登录</a>
                 </c:if>
                 <c:if test="${sessionScope.loginUser != null}">
                     <a href="javascript:;">
                         <i class="layui-icon wd-user-avatar">&#xe612;</i>
                     </a>
                     <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                        <dd><a href="info_ShowAdd.action?addType=linkTo">发布信息</a></dd>
-                        <dd><a href="info_SearchShow.action?subsql=info_userid&sqlvalue=${sessionScope.loginUser.id}&type=all">我的管理</a></dd>
-                        <dd><a href="wapLog_Logout.action">退出登录</a></dd>
+                        <dd><a href="wapinfo_ShowAdd.action?addType=linkTo">发布信息</a></dd>
+                        <dd><a href="wapinfo_SearchShow.action?subsql=info_userid&sqlvalue=${sessionScope.loginUser.id}&type=all">我的管理</a></dd>
+                        <dd><a href="waplog_Logout.action">退出登录</a></dd>
                     </dl>
                 </c:if>
             </li>
-            <li class="layui-nav-item wd-nav-logo"><a href="wapIndex.action">首页</a></li>
+            <li class="layui-nav-item wd-nav-logo"><a href="wapindex.action">首页</a></li>
             <li class="layui-nav-item wd-nav-icon wa-nav-items-list"><i class="layui-icon">&#xe668;</i></li>
             <div class="clearBoth"></div>
         </ul>
@@ -104,7 +104,7 @@
 <div class="wd-nav-choise">
     <div class="wd-nav-choise-div">
         <c:forEach var="item" items="${sessionScope.typeMap}" end="11">
-            <li class="layui-nav-item"><a href="info_ListShow.action?infoType=${item.key}">${item.value}</a></li>
+            <li class="layui-nav-item"><a href="wapinfo_ListShow.action?infoType=${item.key}">${item.value}</a></li>
         </c:forEach>
         <div class="clearBoth"></div>
     </div>

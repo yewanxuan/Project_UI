@@ -29,7 +29,7 @@
 function refreshReg(id){
      $.ajax({
             type:'post',
-            url:'${pageContext.request.contextPath }/info_Edit.action',
+            url:'${pageContext.request.contextPath }/wapinfo_Edit.action',
             data:{
                 "id":id,
                 "worktype":"refresh"
@@ -44,7 +44,7 @@ function refreshReg(id){
 function deleteReg(id){
      $.ajax({
             type:'post',
-            url:'${pageContext.request.contextPath }/info_Edit.action',
+            url:'${pageContext.request.contextPath }/wapinfo_Edit.action',
             data:{
                 "id":id,
                 "worktype":"delete"
@@ -61,9 +61,9 @@ function deleteReg(id){
 </script>
 <html>
 <head>
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <title>项目信息网</title>
     <base href="<%=basePath%>">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/assets/layui/css/layui.css">
     <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/public/reset.css">
     <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/public/public.css">
@@ -116,10 +116,9 @@ function deleteReg(id){
                             </select>
                         </div>
                     </div>
-
                     <div class="layui-form-item wd-fileter-form-item">
                         <div class="layui-input-block wd-btn-block">
-                            <button class="layui-btn layui-btn-fluid" lay-submit ><!-- lay-filter="formDemo" --> 筛&nbsp;&nbsp;&nbsp;选</button>
+                            <button class="layui-btn layui-btn-fluid" lay-submit ><!-- lay-filter="formDemo" --> 筛选</button>
                         </div>
                     </div>
                 </form>    
@@ -168,7 +167,7 @@ function deleteReg(id){
 		                                     <font  face="arial" color="#c2c2c2">${attentItem.value}</font>   
 		                                </c:if>
 		                        </c:forEach>
-		                        <a href = "thread_threadShow.action?threadId='${teh.id}'">展开评论</a>
+		                        <a href = "wapthread_threadShow.action?threadId='${teh.id}'">展开评论</a>
                            	</h2>
 						
 							<c:choose>
@@ -176,23 +175,23 @@ function deleteReg(id){
 							       	<div class="layui-colla-content layui-show" >
 							    </c:when>
 							    <c:otherwise>
-							       <div class="layui-colla-content" ">
+							       <div class="layui-colla-content">
 							    </c:otherwise>
 							</c:choose>
 
-                                <div class="wd-colla-top" id ="time_${teh.id}" >
-                                    <span>发布时间：</span>
-                                    <span class="sendTime">${teh.infoDate}</span>
-                                </div>
+                                <%--<div class="wd-colla-top" id ="time_${teh.id}" >--%>
+                                    <%--<span>发布时间：</span>--%>
+                                    <%--<span class="sendTime">${teh.infoDate}</span>--%>
+                                <%--</div>--%>
 							    <div class="wd-colla-top">	
  									<c:if test="${sessionScope.loginAdmin!=null}">
  										 <span><a href=""><font color = "#009688">加精</font></a></span>
-                                         <span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>
+                                         <span><a href="wapinfo_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span>
                                     </c:if>
                                     <c:if test="${sessionScope.loginUserId!=null && sessionScope.loginUserId!='' && teh.infoUserid!='' && teh.infoUserid!=null}">
                                          <c:if test="${sessionScope.loginUserId==teh.infoUserid}">
                                            	<%-- <span><a href="info_Edit.action?worktype=refresh&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">擦亮   </font></a></span> --%>
-                                            <span><a href="info_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>
+                                            <span><a href="wapinfo_Edit.action?worktype=change&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">修改   </font></a></span>
                                             <%--  <span><a href="info_Edit.action?worktype=delete&id=${teh.id}&infoType=${teh.infoType}"><font color ="#009688">删除</font></a></span> --%>
                                          	<span><a href="javascript:" onclick="refreshReg('${teh.id}')"><font color ="#009688">擦亮</font></a></span>
                                          	<span><a href="javascript:" onclick="deleteReg('${teh.id}')"><font color ="#009688">删除</font></a></span>
@@ -212,6 +211,10 @@ function deleteReg(id){
                                     <div class="wd-bottom-area wd-person-area">
                                         <span>E-mail：</span>
                                         <span>${teh.infoEmail}</span>
+                                    </div>
+                                    <div class="wd-bottom-area wd-person-area">
+                                        <span>发布时间：</span>
+                                        <span>${teh.infoDate}</span>
                                     </div>
                                  
 
@@ -336,6 +339,6 @@ function deleteReg(id){
     <script src="<%= request.getContextPath()%>/wap/js/index.js"></script>
     <script src="<%= request.getContextPath()%>/wap/js/homepage.js"></script>
     
-    
+
 </body>
 </html>

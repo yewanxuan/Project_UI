@@ -13,9 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
     <title>项目信息网</title>
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/assets/layui/css/layui.css"> 
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/public/reset.css"> 
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/app/css/sendinfo.css"> 
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/assets/layui/css/layui.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/public/reset.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/wap/css/sendinfo.css">
 
 </head>
 <body>
@@ -77,7 +78,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="components/header.jsp"></jsp:include>
     <div class="content">
         <hr class="clearBoth">
-        <div class="headTitle"><i class="layui-icon">&#xe609;</i>发布信息</div>
+
+        <div class="headTitle">
+            <span class="headerSpan"></span>
+            <i class="layui-icon">&#xe609;</i>发布信息</div>
         <form class="layui-form wd-form" action="info_addInfo.action" name="frm">
              <div class="layui-form-item">
                 <label class="layui-form-label">信息类别</label>
@@ -116,14 +120,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">信息标题</label>
-                <div class="layui-input-block">
-                    <input type="text" name="infoTitle"  required  value = "${requestScope.infoSingle.infoTitle}"
-								placeholder="请输入项目内容（4 ~ 40字符）" 
-                     lay-verify="required|title" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">联系人</label>
                 <div class="layui-input-block">
                     <input type="text" name="infoPeople" required value="${requestScope.infoSingle.infoLinkman}" 
@@ -142,9 +138,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <input type="text" name="infoEmail" required value="${requestScope.infoSingle.infoEmail}" lay-verify="email|(^$)" autocomplete="off" class="layui-input">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">信息标题</label>
+                <div class="layui-input-block"></div>
+                <div class="layui-input-block wd-input-block-item">
+                    <input type="text" name="infoTitle"  required  value = "${requestScope.infoSingle.infoTitle}"
+                           placeholder="请输入项目内容（4 ~ 40字符）"
+                           lay-verify="required|title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">信息内容</label>
-                <div class="layui-input-block">
+                <div class="layui-input-block"></div>
+                <div class="layui-input-block wd-input-block-item">
                     <textarea name="infoContent" placeholder="请输入项目内容（0 ~ 500字符）" 
                        class="layui-textarea wd-textarea">${requestScope.infoSingle.infoContent}</textarea>
                 </div>
@@ -160,9 +166,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
     </div>
 
-    <script src="<%= request.getContextPath()%>/app/js/public/jquery-3.2.1.min.js"></script>
-    <script src="<%= request.getContextPath()%>/app/assets/layui/layui.js"></script>
-    <script src="<%= request.getContextPath()%>/app/js/sendinfo.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/js/public/jquery-3.2.1.min.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/assets/layui/layui.js"></script>
+    <script src="<%= request.getContextPath()%>/wap/js/sendinfo.js"></script>
 
     <script>
 

@@ -42,13 +42,13 @@ body {
     width: 100%;
 }
 .wd-search-form-item{
-    width: 40%;
+    width: 39%;
     display: inline-block;
 }
 .wd-fileter-form-item{
     position: relative;
     top: -2px;
-    width: 15%;
+    width: 77%;
     margin-left: 5px;
     display: inline-block;
 }
@@ -57,11 +57,11 @@ body {
     margin: 0 10px 0 0;
 }
 .wd-form-label{
-    width: 50px;
+    width: 40px;
     padding: 9px 0;
 }
 .wd-input-block{
-    margin-left: 60px;
+    margin-left: 52px;
 }
 .wd-btn-block{
     margin-left: 0px;
@@ -117,7 +117,9 @@ body {
     font-size: 10px;
 }
 .wd-bottom-area{
-    width: 33%;
+    width: 63%;
     display: inline-block;
 }
-
+.wd-person-area{
+    display: block;
+}
