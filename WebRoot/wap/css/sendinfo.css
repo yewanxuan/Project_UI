@@ -1,0 +1,53 @@
+body{
+    text-align: center;
+    background-color: #efefef;
+}
+.content{
+    width: 100%;
+    min-height: 700px;
+    margin: 90px auto 0;
+    background-color: #ffffff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    -moz-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+}
+.clearBoth{
+    clear: both;
+}
+.headTitle{
+    height: 30px;
+    font-size: 22px;
+    color: grey;
+    text-align: left;
+    margin: 40px 0 30px 0px;
+}
+.headerSpan{
+    display: inline-block;
+    width: 39px;
+    height: 30px;
+}
+.wd-form{
+    margin-left: 4%;
+    width: 88%;
+}
+.headTitle i{
+    font-size: 22px;
+    margin-right: 5px;
+}
+.wd-select-block{
+    /*width: 300px;*/
+}
+.wd-textarea{
+    height: 220px;
+}
+.wd-button-submit{
+    float: right;
+    padding: 0 40px;
+    margin-bottom: 30px;
+}
+.wd-input-block-item{
+    width: 94%;
+    margin-top: 10px;
+    margin-left: 20px;
+}

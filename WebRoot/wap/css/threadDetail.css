@@ -1,0 +1,97 @@
+body {
+    background-color: #eeeeee;
+}
+.container{
+    width: 100%;
+    min-height: 600px;
+    margin: 70px auto 0;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+}
+.ad-card-header{
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+.ad-card-body{
+    width: 92%;
+    min-height: 160px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+    word-break: break-all;
+    padding: 0px !important;
+}
+.ad-input-block{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+.ad-button-block{
+    float: right;
+    margin-right: 20px;
+}
+.ad-layui-btn{
+    padding: 0 40px;
+    position: relative;
+    right: 20px;
+    top: 5px;
+    float: right;
+}
+.comment{
+    width: 95%;
+    min-height: 30px;
+    margin: 0 auto;
+}
+.comment-item{
+    width: 98%;
+    padding: 0 5px 5px;
+    border-top: 1px solid #dcdcdc;
+}
+.comment-item:hover{
+    -webkit-box-shadow: 0px 1px 20px 1px #bbbbbb;
+    -moz-box-shadow: 0px 1px 20px 1px #bbbbbb;
+    box-shadow: 0px 1px 20px 1px #bbbbbb;
+}
+.com-header{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+.com-body{
+    width: 100%;
+    min-height: 40px;
+    word-break: break-all;
+}
+.com-tail{
+    /*display: none;*/
+}
+.com-reply{
+    width: 100%;
+    height: 30px;
+}
+.com-reply span{
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    right: 20px;
+}
+.com-date{
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #acacac;
+}
+.clearBoth{
+    clear: both;
+    margin-bottom: 10px;
+}
+.ad-thread-textarea{
+    width: 96%;
+    margin: 0 auto;
+}
+.ad-btn-send-reply{
+    right: 0px;
+}
