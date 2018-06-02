@@ -1,0 +1,78 @@
+body {
+    background-color: #efefef;
+}
+.loginFrame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 400px;
+    height: 440px;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    -moz-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    background-color: white;
+}
+.loginArea{
+    width: 70%;
+    margin: 0px auto;
+}
+.loginTitle{
+    margin: 60px auto 40px;
+    font-size: 22px;
+    color: #8b8b8b;
+}
+.registerFrame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 400px;
+    height: 540px;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    -moz-box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 8px rgba(0,0,0,.1);
+    background-color: white;
+}
+.registerArea{
+    display: none;
+    width: 70%;
+    margin: 0px auto;
+}
+.registerTitle{
+    margin: 60px auto 40px;
+    font-size: 22px;
+    color: #8b8b8b;
+}
+.blueFont{
+    color: #439ff8;
+}
+.userLogin{
+    cursor: pointer;
+}
+.userRegister{
+    cursor: pointer;
+}
+.wd-input-block{
+    font-size: 14px;
+    margin-left: 0px;
+}
+.wd-input-block .layui-btn{
+    margin-left: 0px;
+    margin-bottom: 15px;
+}
+.wd-forget{
+    cursor: pointer;
+    color: #808080;
+    clear: both;
+    float: left;
+    margin-bottom: 20px;
+}
